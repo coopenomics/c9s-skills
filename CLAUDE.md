@@ -22,6 +22,7 @@ claude-code-bmad-skills/
 │   ├── hooks/                # Session/tool hooks
 │   └── examples/             # Example project templates
 ├── bmad-v6/                  # Legacy/source BMAD implementation
+├── bmad-c9s/                 # Coopenomics: Capital/GitHub results, RU, .c9s/ (см. bmad-c9s/CLAUDE.md). Ревью: `on_review` только по явной команде оператора — скилл `c9s-submit-for-review`, см. bmad-c9s/docs/TASKS-DOCUMENTS-TIME-POLICY.md §2
 ├── docs/                     # GitHub Pages documentation site
 └── install-v6.sh/ps1         # Installation scripts
 ```

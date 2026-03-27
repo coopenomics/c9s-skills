@@ -1,0 +1,37 @@
+# Скопируйте в корень репозитория результатов как c9s-config.yaml
+# или укажите путь к этому файлу в настройках агента.
+
+# Абсолютный путь к каталогу-корню клона репозитория результатов
+results_root: /Users/USER/dacom-code/foundation/results
+
+# Slug активного корневого проекта = имя папки первого уровня под results_root
+# (совпадает с generateSlug(title) корневого project.md)
+active_project_slug: my-project-slug
+
+# Идентификация в frontmatter задач/требований
+coopname: your-coop
+# Аккаунт в кооперативе (blockchain username). Должен совпадать с тем, что в каждой новой issues/*.md:
+#   created_by: <username>
+#   submaster: <username>
+#   creators: [<username>]
+# Без этих трёх полей с корректным username учёт времени в Capital не работает.
+# То же значение — в results_commits.yaml → username при учёте merge в dev.
+username: your-username
+
+# Язык артефактов и общения по умолчанию
+default_language: ru
+
+# Опционально: относительный путь к вложенному компоненту от корня проекта
+# Пример: components/backend-api
+# active_component_path: ""
+
+# --- Монорепозиторий кода (скилл c9s-monorepo-component-git) ---
+# Абсолютный путь к корню git монорепозитория (монорепо кода; журнал merge НЕ здесь)
+# monorepo_root: /Users/USER/dacom-code/foundation/monocoop
+# Имя каталога компонента под components/ (desktop, controller, sdk, …)
+# active_component_git_slug: desktop
+# Журнал merge → dev для ручной подачи взносов: YAML в репозитории результатов.
+# Относительно {results_root}/{active_project_slug} или абсолютный путь. По умолчанию — .c9s/results_commits.yaml
+# results_commits_log: .c9s/results_commits.yaml
+# Последний зафиксированный SHA merge (дубль; канон — файл results_commits_log)
+# last_merge_to_dev_commit_hash: ""

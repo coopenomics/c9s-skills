@@ -1,0 +1,14 @@
+# Спринт bmad-c9s — {base}/.c9s/sprint-status.yaml
+# Не синхронизируется с Capital как issue/story.
+
+sprint_name: "{{SPRINT_NAME}}"
+start_date: "{{START_DATE}}"
+end_date: "{{END_DATE}}"
+last_updated: "{{TIMESTAMP}}"
+
+goal: "{{SPRINT_GOAL}}"
+
+# issue_hash или пути к issues/*.md для человекочитаемости
+committed_issues: []
+
+notes: ""

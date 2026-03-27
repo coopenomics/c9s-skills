@@ -1,0 +1,16 @@
+# Учёт merge-коммитов: ветка компонента → ветка dev (монорепозиторий кода).
+# Файл НЕ в монорепо кода. Хранить в репозитории результатов Capital, рядом с .c9s:
+# по умолчанию {projectRoot}/.c9s/results_commits.yaml или путь из results_commits_log в c9s-config.yaml.
+# Имя файла обычно: results_commits.yaml
+# Новые элементы добавляются в НАЧАЛО списка commits (первый = самый новый).
+#
+# status:
+#   pending      — merge зафиксирован, паевой взнос ещё не отмечен
+#   contributed  — вручную сменить после внесения взноса в кооператив
+#
+# merge_commit_hash — полный SHA коммита merge на dev (или эквивалент при FF — см. скилл c9s-monorepo-component-git)
+#
+# username      — аккаунт оператора (из c9s-config.yaml username); в общем репозитории по нему видно, чья запись
+# merge_title   — человекочитаемое краткое название содержания merge (обычно git log -1 --format=%s после merge на dev)
+
+commits: []

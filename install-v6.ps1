@@ -1,8 +1,8 @@
 ###############################################################################
-# BMAD Method v6 for Claude Code - PowerShell Installation Script
+# BMAD-c9s (Coopenomics) for Claude Code — PowerShell installer
 #
-# Installs BMAD Method v6 using only Claude Code native features
-# No npx, no external dependencies, pure Claude Code
+# Устанавливает скиллы и команды из bmad-c9s/. Каталог bmad-v6/ в репозитории
+# не изменяется; при наличии копируется helpers.md как helpers-bmad-v6-en.md.
 #
 # Supports: PowerShell 5.1+ (Windows default) and PowerShell 6+ (Core)
 #
@@ -11,20 +11,20 @@
 #   .\install-v6.ps1 -Verbose     # Detailed diagnostic output
 #   .\install-v6.ps1 -WhatIf      # Dry-run (show what would be installed)
 #   .\install-v6.ps1 -Force       # Force reinstall over existing
-#   .\install-v6.ps1 -Uninstall   # Remove BMAD Method v6
+#   .\install-v6.ps1 -Uninstall   # Remove BMAD-c9s from ~/.claude/.../bmad
 ###############################################################################
 
 <#
 .SYNOPSIS
-    Installs BMAD Method v6 for Claude Code.
+    Installs BMAD-c9s (Coopenomics) for Claude Code.
 
 .DESCRIPTION
-    This script installs the BMAD Method v6 framework to the Claude Code
-    configuration directory (~/.claude/). It includes:
-    - Core orchestration skills
-    - BMM (BMAD Method Management) skills
-    - BMB (BMAD Method Baseline) skills (optional)
-    - CIS (Contribution Integration System) skills (optional)
+    Installs skills and slash commands from bmad-c9s/ into the Claude Code
+    directory (~/.claude/). It includes:
+    - Core orchestration (bmad-master-c9s, c9s-master-review)
+    - BMM role skills (analyst, pm, architect, scrum-master, developer, ux-designer)
+    - BMB builder skill
+    - CIS creative-intelligence skill
     - Configuration templates
     - Utility helpers
 
@@ -41,20 +41,20 @@
     Show what would be installed without actually installing (dry-run).
 
 .PARAMETER Force
-    Force reinstallation even if BMAD v6 is already installed.
+    Force reinstallation even if BMAD-c9s is already installed.
 
 .PARAMETER Uninstall
-    Remove BMAD Method v6 from the system.
+    Remove BMAD-c9s installation from ~/.claude/skills/bmad, commands/bmad, config/bmad.
 
 .EXAMPLE
     .\install-v6.ps1
 
-    Installs BMAD Method v6 with standard output.
+    Installs BMAD-c9s with standard output.
 
 .EXAMPLE
     .\install-v6.ps1 -Verbose
 
-    Installs BMAD Method v6 with detailed diagnostic output.
+    Installs BMAD-c9s with detailed diagnostic output.
 
 .EXAMPLE
     .\install-v6.ps1 -WhatIf
@@ -64,12 +64,12 @@
 .EXAMPLE
     .\install-v6.ps1 -Uninstall
 
-    Removes BMAD Method v6 from the system.
+    Removes BMAD-c9s from ~/.claude/.../bmad.
 
 .NOTES
-    Version: 6.0.3
+    Version: 1.0.0 (BMAD-c9s)
     Requires: PowerShell 5.1+
-    Updated: 2025-11-14
+    Updated: 2025-03-27
     Changes: Fixed PowerShell function scoping issues for WSL compatibility by making all
              functions globally scoped. This resolves "Write-Success is not recognized" errors
              when running in WSL PowerShell environments.
@@ -89,7 +89,7 @@ $ErrorActionPreference = "Stop"
 # Configuration
 ###############################################################################
 
-$BmadVersion = "6.0.3"
+$BmadVersion = "1.0.0"
 
 # PowerShell version detection
 $PSVersion = $PSVersionTable.PSVersion.Major
@@ -240,13 +240,15 @@ $BmadSkillsDir = Join-PathCompat $ClaudeDir "skills" "bmad"
 $BmadCommandsDir = Join-PathCompat $ClaudeDir "commands" "bmad"
 $ScriptDir = $PSScriptRoot
 
-# Source directories
+# Source directories (primary: bmad-c9s; bmad-v6 only for optional EN helpers)
+$SourceBmadC9sDir = Join-Path $ScriptDir "bmad-c9s"
 $SourceBmadV6Dir = Join-Path $ScriptDir "bmad-v6"
-$SourceSkillsDir = Join-PathCompat $SourceBmadV6Dir "skills"
-$SourceConfigDir = Join-PathCompat $SourceBmadV6Dir "config"
-$SourceTemplatesDir = Join-PathCompat $SourceBmadV6Dir "templates"
-$SourceUtilsDir = Join-PathCompat $SourceBmadV6Dir "utils"
-$SourceCommandsDir = Join-PathCompat $SourceBmadV6Dir "commands"
+$SourceSkillsDir = Join-PathCompat $SourceBmadC9sDir "skills"
+$SourceConfigDir = Join-PathCompat $SourceBmadC9sDir "config"
+$SourceTemplatesDir = Join-PathCompat $SourceBmadC9sDir "templates"
+$SourceUtilsDir = Join-PathCompat $SourceBmadC9sDir "utils"
+$SourceCommandsDir = Join-PathCompat $SourceBmadC9sDir "commands"
+$SourceC9sDocsDir = Join-PathCompat $SourceBmadC9sDir "docs"
 
 ###############################################################################
 # Pre-Flight Validation
@@ -276,12 +278,12 @@ function global:Test-Prerequisites {
         $errors += "Script directory not found: $ScriptDir"
     }
 
-    # Check if bmad-v6 source directory exists
-    if (-not (Test-Path $SourceBmadV6Dir)) {
-        $errors += "Source directory not found: $SourceBmadV6Dir"
-        $errors += "Make sure you're running this script from the repository root"
+    # Check if bmad-c9s source directory exists
+    if (-not (Test-Path $SourceBmadC9sDir)) {
+        $errors += "Source directory not found: $SourceBmadC9sDir"
+        $errors += "Run this script from the claude-code-bmad-skills repository root"
     } else {
-        Write-Success "Found source directory: $SourceBmadV6Dir"
+        Write-Success "Found source directory: $SourceBmadC9sDir"
     }
 
     # Check required source subdirectories
@@ -315,9 +317,9 @@ function global:Test-Prerequisites {
     }
 
     # Check if already installed
-    $bmadMasterPath = Join-PathCompat $BmadSkillsDir "core" "bmad-master" "SKILL.md"
+    $bmadMasterPath = Join-PathCompat $BmadSkillsDir "core" "bmad-master-c9s" "SKILL.md"
     if ((Test-Path $bmadMasterPath) -and -not $Force) {
-        Write-Warning "BMAD Method v6 is already installed at: $BmadSkillsDir"
+        Write-Warning "BMAD-c9s is already installed at: $BmadSkillsDir"
         Write-Host ""
         Write-Host "Options:" -ForegroundColor Yellow
         Write-Host "  1. Run with -Force to reinstall"
@@ -354,9 +356,9 @@ function global:Test-Prerequisites {
 ###############################################################################
 
 function global:Uninstall-BmadV6 {
-    Write-Header "BMAD Method v$BmadVersion Uninstaller"
+    Write-Header "BMAD-c9s v$BmadVersion — удаление"
 
-    Write-Info "Checking for BMAD Method v6 installation..."
+    Write-Info "Checking for BMAD-c9s installation..."
 
     $dirsToRemove = @(
         $BmadSkillsDir,
@@ -373,13 +375,13 @@ function global:Uninstall-BmadV6 {
     }
 
     if (-not $found) {
-        Write-Warning "BMAD Method v6 is not installed"
+        Write-Warning "BMAD-c9s is not installed under ~/.claude/.../bmad"
         Write-Host "Nothing to uninstall."
         exit 0
     }
 
     Write-Host ""
-    Write-Warning "This will remove BMAD Method v6 from your system:"
+    Write-Warning "This will remove BMAD-c9s from your system:"
     foreach ($dir in $dirsToRemove) {
         if (Test-Path $dir) {
             Write-Host "  - $dir" -ForegroundColor Yellow
@@ -395,7 +397,7 @@ function global:Uninstall-BmadV6 {
         }
     }
 
-    Write-Info "Uninstalling BMAD Method v6..."
+    Write-Info "Uninstalling BMAD-c9s..."
 
     try {
         foreach ($dir in $dirsToRemove) {
@@ -408,7 +410,7 @@ function global:Uninstall-BmadV6 {
         }
 
         Write-Host ""
-        Write-Success "BMAD Method v6 has been uninstalled successfully!"
+        Write-Success "BMAD-c9s has been uninstalled successfully!"
         Write-Host ""
         exit 0
     }
@@ -423,7 +425,7 @@ function global:Uninstall-BmadV6 {
 ###############################################################################
 
 function global:New-Directories {
-    Write-Progress -Activity "Installing BMAD Method v6" -Status "Creating directory structure..." -PercentComplete 0
+    Write-Progress -Activity "Installing BMAD-c9s" -Status "Creating directory structure..." -PercentComplete 0
     Write-Info "Creating directory structure..."
 
     try {
@@ -457,8 +459,8 @@ function global:New-Directories {
 }
 
 function global:Install-Skills {
-    Write-Progress -Activity "Installing BMAD Method v6" -Status "Installing BMAD skills..." -PercentComplete 20
-    Write-Info "Installing BMAD skills..."
+    Write-Progress -Activity "Installing BMAD-c9s" -Status "Installing skills..." -PercentComplete 20
+    Write-Info "Installing BMAD-c9s skills..."
 
     $skillComponents = @(
         @{
@@ -525,53 +527,23 @@ function global:Install-Skills {
 }
 
 function global:Install-Config {
-    Write-Progress -Activity "Installing BMAD Method v6" -Status "Installing configuration..." -PercentComplete 40
-    Write-Info "Installing configuration..."
+    Write-Progress -Activity "Installing BMAD-c9s" -Status "Installing configuration..." -PercentComplete 40
+    Write-Info "Installing BMAD-c9s configuration template..."
 
     try {
-        # Install config template
-        $ConfigTemplatePath = Join-PathCompat $SourceConfigDir "config.template.yaml"
-        $ConfigPath = Join-Path $BmadConfigDir "config.yaml"
+        $C9sConfigTemplatePath = Join-PathCompat $SourceConfigDir "c9s-config.template.yaml"
+        $C9sConfigDestPath = Join-Path $BmadConfigDir "c9s-config.template.yaml"
 
-        Write-Verbose "Config template: $ConfigTemplatePath"
-        Write-Verbose "Config destination: $ConfigPath"
+        Write-Verbose "Config template: $C9sConfigTemplatePath"
+        Write-Verbose "Config destination: $C9sConfigDestPath"
 
-        if (Test-Path $ConfigTemplatePath) {
-            if (-not (Test-Path $ConfigPath) -or $Force) {
-                if ($PSCmdlet.ShouldProcess($ConfigPath, "Create configuration")) {
-                    # Create config from template, substituting variables
-                    Write-Verbose "Creating config from template"
-                    $configContent = Get-Content $ConfigTemplatePath -Raw -ErrorAction Stop
-
-                    # Get username (cross-platform)
-                    $userName = if ($env:USERNAME) { $env:USERNAME } else { $env:USER }
-                    $configContent = $configContent -replace '{{USER_NAME}}', $userName
-
-                    Set-Content -Path $ConfigPath -Value $configContent -Encoding UTF8 -ErrorAction Stop
-                    Write-Success "Configuration created"
-                    Write-Verbose "  User: $userName"
-                }
-            } else {
-                Write-Info "Configuration already exists, preserving"
-                Write-Verbose "  Existing config: $ConfigPath"
+        if (Test-Path $C9sConfigTemplatePath) {
+            if ($PSCmdlet.ShouldProcess($C9sConfigDestPath, "Copy c9s config template")) {
+                Copy-ItemSafe -SourcePath $C9sConfigTemplatePath -DestinationPath $C9sConfigDestPath -Force -ErrorContext "c9s config template"
+                Write-Success "c9s-config.template.yaml installed (copy to your results repo as c9s-config.yaml)"
             }
         } else {
-            Write-Warning "Config template not found at: $ConfigTemplatePath"
-        }
-
-        # Copy project config template
-        $ProjectConfigTemplatePath = Join-PathCompat $SourceConfigDir "project-config.template.yaml"
-        $ProjectConfigDestPath = Join-Path $BmadConfigDir "project-config.template.yaml"
-
-        Write-Verbose "Project config template: $ProjectConfigTemplatePath"
-
-        if (Test-Path $ProjectConfigTemplatePath) {
-            if ($PSCmdlet.ShouldProcess($ProjectConfigDestPath, "Copy project config template")) {
-                Copy-ItemSafe -SourcePath $ProjectConfigTemplatePath -DestinationPath $ProjectConfigDestPath -Force -ErrorContext "project config template"
-                Write-Verbose "  Project config template installed"
-            }
-        } else {
-            Write-Verbose "Project config template not found (skipping)"
+            Write-Warning "c9s-config.template.yaml not found at: $C9sConfigTemplatePath"
         }
     }
     catch {
@@ -581,7 +553,7 @@ function global:Install-Config {
 }
 
 function global:Install-Templates {
-    Write-Progress -Activity "Installing BMAD Method v6" -Status "Installing templates..." -PercentComplete 60
+    Write-Progress -Activity "Installing BMAD-c9s" -Status "Installing templates..." -PercentComplete 60
     Write-Info "Installing templates..."
 
     try {
@@ -608,35 +580,59 @@ function global:Install-Templates {
 }
 
 function global:Install-Utils {
-    Write-Progress -Activity "Installing BMAD Method v6" -Status "Installing utility helpers..." -PercentComplete 70
-    Write-Info "Installing utility helpers..."
+    Write-Progress -Activity "Installing BMAD-c9s" -Status "Installing docs and helpers..." -PercentComplete 70
+    Write-Info "Installing docs and helpers (c9s)..."
 
     try {
-        $HelpersPath = Join-PathCompat $SourceUtilsDir "helpers.md"
-        $HelpersDestPath = Join-Path $BmadConfigDir "helpers.md"
-
-        Write-Verbose "Helpers source: $HelpersPath"
-        Write-Verbose "Helpers destination: $HelpersDestPath"
-
-        if (Test-Path $HelpersPath) {
-            if ($PSCmdlet.ShouldProcess($HelpersDestPath, "Copy helpers")) {
-                Copy-ItemSafe -SourcePath $HelpersPath -DestinationPath $HelpersDestPath -Force -ErrorContext "utility helpers"
-                Write-Success "Utility helpers installed"
-                Write-Verbose "  Copied to: $HelpersDestPath"
+        $HelpersRuPath = Join-PathCompat $SourceUtilsDir "helpers-ru.md"
+        $HelpersRuDest = Join-Path $BmadConfigDir "helpers-ru.md"
+        if (Test-Path $HelpersRuPath) {
+            if ($PSCmdlet.ShouldProcess($HelpersRuDest, "Copy helpers-ru.md")) {
+                Copy-ItemSafe -SourcePath $HelpersRuPath -DestinationPath $HelpersRuDest -Force -ErrorContext "helpers-ru"
+                Write-Success "helpers-ru.md installed"
             }
         } else {
-            Write-Warning "Helpers not found at: $HelpersPath"
+            Write-Warning "helpers-ru.md not found at: $HelpersRuPath"
+        }
+
+        $FormatPath = Join-PathCompat $SourceC9sDocsDir "FORMAT-CAPITAL-GITHUB.md"
+        $FormatDest = Join-Path $BmadConfigDir "FORMAT-CAPITAL-GITHUB.md"
+        if (Test-Path $FormatPath) {
+            if ($PSCmdlet.ShouldProcess($FormatDest, "Copy FORMAT-CAPITAL-GITHUB.md")) {
+                Copy-ItemSafe -SourcePath $FormatPath -DestinationPath $FormatDest -Force -ErrorContext "FORMAT doc"
+                Write-Success "FORMAT-CAPITAL-GITHUB.md installed"
+            }
+        }
+
+        $ClaudeSrc = Join-Path $SourceBmadC9sDir "CLAUDE.md"
+        $ClaudeDest = Join-Path $BmadConfigDir "CLAUDE-bmad-c9s.md"
+        if (Test-Path $ClaudeSrc) {
+            if ($PSCmdlet.ShouldProcess($ClaudeDest, "Copy CLAUDE-bmad-c9s.md")) {
+                Copy-ItemSafe -SourcePath $ClaudeSrc -DestinationPath $ClaudeDest -Force -ErrorContext "CLAUDE overview"
+                Write-Success "CLAUDE-bmad-c9s.md installed"
+            }
+        }
+
+        $V6Helpers = Join-PathCompat $SourceBmadV6Dir "utils" "helpers.md"
+        $V6HelpersDest = Join-Path $BmadConfigDir "helpers-bmad-v6-en.md"
+        if (Test-Path $V6Helpers) {
+            if ($PSCmdlet.ShouldProcess($V6HelpersDest, "Copy BMAD v6 EN helpers (reference)")) {
+                Copy-ItemSafe -SourcePath $V6Helpers -DestinationPath $V6HelpersDest -Force -ErrorContext "v6 helpers EN"
+                Write-Success "helpers-bmad-v6-en.md (BMAD v6 reference) installed"
+            }
+        } else {
+            Write-Verbose "bmad-v6/utils/helpers.md not found — skipping EN reference"
         }
     }
     catch {
-        Write-ErrorMsg "Failed to install utility helpers"
+        Write-ErrorMsg "Failed to install docs/helpers"
         throw
     }
 }
 
 function global:Install-Commands {
-    Write-Progress -Activity "Installing BMAD Method v6" -Status "Installing slash commands..." -PercentComplete 80
-    Write-Info "Installing slash commands..."
+    Write-Progress -Activity "Installing BMAD-c9s" -Status "Installing slash commands..." -PercentComplete 80
+    Write-Info "Installing slash commands from bmad-c9s/commands..."
 
     try {
         Write-Verbose "Commands source: $SourceCommandsDir"
@@ -672,26 +668,26 @@ function global:Install-Commands {
 }
 
 function global:Test-Installation {
-    Write-Progress -Activity "Installing BMAD Method v6" -Status "Verifying installation..." -PercentComplete 90
+    Write-Progress -Activity "Installing BMAD-c9s" -Status "Verifying installation..." -PercentComplete 90
     Write-Info "Verifying installation..."
 
     $errors = 0
     $checks = @(
         @{
-            Name = "BMad Master skill"
-            Path = Join-PathCompat $BmadSkillsDir "core" "bmad-master" "SKILL.md"
+            Name = "bmad-master-c9s skill"
+            Path = Join-PathCompat $BmadSkillsDir "core" "bmad-master-c9s" "SKILL.md"
         },
         @{
-            Name = "Configuration"
-            Path = Join-Path $BmadConfigDir "config.yaml"
+            Name = "c9s config template"
+            Path = Join-Path $BmadConfigDir "c9s-config.template.yaml"
         },
         @{
-            Name = "Helpers"
-            Path = Join-Path $BmadConfigDir "helpers.md"
+            Name = "helpers-ru"
+            Path = Join-Path $BmadConfigDir "helpers-ru.md"
         },
         @{
-            Name = "Slash commands"
-            Path = Join-Path $BmadCommandsDir "workflow-init.md"
+            Name = "Slash command c9s-init"
+            Path = Join-Path $BmadCommandsDir "c9s-init.md"
         }
     )
 
@@ -726,84 +722,57 @@ function global:Test-Installation {
 }
 
 function global:Show-NextSteps {
-    Write-Header "Installation Complete!"
+    Write-Header "BMAD-c9s — установка завершена"
 
-    Write-Host "[SUCCESS] BMAD Method v$BmadVersion installed successfully!" -ForegroundColor Green
+    Write-Host "[SUCCESS] BMAD-c9s v$BmadVersion (Coopenomics) установлен." -ForegroundColor Green
     Write-Host ""
-    Write-Host "Installation location:"
+    Write-Host "Каталоги:"
     Write-Host "  Skills:   $BmadSkillsDir"
     Write-Host "  Commands: $BmadCommandsDir"
     Write-Host "  Config:   $BmadConfigDir"
     Write-Host ""
-    Write-Host "[OK] 9 Specialized Skills"
-    Write-Host "     - Core orchestrator (BMad Master)"
-    Write-Host "     - Agile agents (Analyst, PM, Architect, SM, Developer, UX)"
-    Write-Host "     - Builder module (custom agents and workflows)"
-    Write-Host "     - Creative Intelligence (brainstorming and research)"
+    Write-Host "Источник: bmad-c9s/ (bmad-v6/ в репозитории не изменяется)."
     Write-Host ""
-    Write-Host "[OK] 15 Workflow Commands"
-    Write-Host "     - /workflow-init, /workflow-status"
-    Write-Host "     - /product-brief, /prd, /tech-spec"
-    Write-Host "     - /architecture, /solutioning-gate-check"
-    Write-Host "     - /sprint-planning, /create-story, /dev-story"
-    Write-Host "     - /brainstorm, /research"
-    Write-Host "     - /create-agent, /create-workflow, /create-ux-design"
+    Write-Host "Дальше:"
+    Write-Host "  1. Перезапустите Claude Code"
+    Write-Host "  2. Скопируйте c9s-config.template.yaml в репозиторий результатов как c9s-config.yaml"
+    Write-Host "  3. Инициализация: /c9s-init (скилл bmad-master-c9s)"
+    Write-Host "  4. Статус: /c9s-status"
     Write-Host ""
-    Write-Host "[OK] Configuration system"
-    Write-Host "[OK] Template engine"
-    Write-Host "[OK] Status tracking utilities"
+    Write-Host "Документация после установки:"
+    Write-Host "  $BmadConfigDir\CLAUDE-bmad-c9s.md"
+    Write-Host "  $BmadConfigDir\FORMAT-CAPITAL-GITHUB.md"
+    Write-Host "  $BmadConfigDir\helpers-ru.md"
     Write-Host ""
-    Write-Host "Next Steps:"
-    Write-Host ""
-    Write-Host "1. " -NoNewline
-    Write-Host "Restart Claude Code" -ForegroundColor Blue
-    Write-Host "   Skills will be loaded in new sessions"
-    Write-Host ""
-    Write-Host "2. " -NoNewline
-    Write-Host "Open your project" -ForegroundColor Blue
-    Write-Host "   Navigate to the project you want to use BMAD with"
-    Write-Host ""
-    Write-Host "3. " -NoNewline
-    Write-Host "Initialize BMAD" -ForegroundColor Blue
-    Write-Host "   Run: /workflow-init"
-    Write-Host "   This sets up BMAD structure in your project"
-    Write-Host ""
-    Write-Host "4. " -NoNewline
-    Write-Host "Check status" -ForegroundColor Blue
-    Write-Host "   Run: /workflow-status"
-    Write-Host "   See your project status and get recommendations"
-    Write-Host ""
-    Write-Host "Verification Commands:"
+    Write-Host "Проверка:"
 
     if ($IsWindows -or $env:OS -match "Windows" -or (-not (Test-Path variable:IsWindows))) {
-        Write-Host "  dir `"$BmadSkillsDir\core\bmad-master\SKILL.md`""
+        Write-Host "  dir `"$BmadSkillsDir\core\bmad-master-c9s\SKILL.md`""
+        Write-Host "  dir `"$BmadCommandsDir\c9s-init.md`""
     } else {
-        Write-Host "  ls -la ~/.claude/skills/bmad/core/bmad-master/SKILL.md"
+        Write-Host "  ls -la ~/.claude/skills/bmad/core/bmad-master-c9s/SKILL.md"
+        Write-Host "  ls -la ~/.claude/commands/bmad/c9s-init.md"
     }
 
     Write-Host ""
-    Write-Host "Documentation:"
-    Write-Host "  README: $ScriptDir\README.md"
+    Write-Host "Исходники пакета: $SourceBmadC9sDir"
     Write-Host ""
-    Write-Host "[OK] BMAD Method v6 is ready!" -ForegroundColor Green
-    Write-Host ""
-    Write-Host "Need help? Visit: https://github.com/aj-geddes/claude-code-bmad-skills/issues"
+    Write-Host "[OK] BMAD-c9s готов." -ForegroundColor Green
 }
 
 function global:Show-WhatIfSummary {
-    Write-Header "Installation Summary (Dry-Run)"
+    Write-Header "Installation Summary (Dry-Run) — BMAD-c9s"
 
-    Write-Host "Would install BMAD Method v$BmadVersion to:"
+    Write-Host "Would install BMAD-c9s v$BmadVersion from: $SourceBmadC9sDir"
     Write-Host "  Skills:   $BmadSkillsDir"
     Write-Host "  Commands: $BmadCommandsDir"
     Write-Host "  Config:   $BmadConfigDir"
     Write-Host ""
     Write-Host "Components:"
-    Write-Host "  [*] 9 specialized skills (Core, BMM, BMB, CIS)"
-    Write-Host "  [*] 15 workflow slash commands"
-    Write-Host "  [*] Configuration templates"
-    Write-Host "  [*] Utility helpers"
-    Write-Host "  [*] Status tracking system"
+    Write-Host "  [*] Skills (core/bmm/bmb/cis) from bmad-c9s/skills"
+    Write-Host "  [*] Slash commands from bmad-c9s/commands"
+    Write-Host "  [*] c9s-config.template.yaml, templates, helpers-ru, docs"
+    Write-Host "  [*] Optional: helpers-bmad-v6-en.md if bmad-v6/utils/helpers.md exists"
     Write-Host ""
     Write-Host "To perform actual installation, run without -WhatIf"
 }
@@ -825,7 +794,7 @@ function global:Main {
         return
     }
 
-    Write-Header "BMAD Method v$BmadVersion Installer"
+    Write-Header "BMAD-c9s v$BmadVersion — installer"
 
     # Show version info
     if ($IsPowerShell5) {
@@ -866,10 +835,10 @@ function global:Main {
         # Verify
         Write-Host ""
         if (Test-Installation) {
-            Write-Progress -Activity "Installing BMAD Method v6" -Status "Complete!" -PercentComplete 100
+            Write-Progress -Activity "Installing BMAD-c9s" -Status "Complete!" -PercentComplete 100
             Write-Host ""
             Show-NextSteps
-            Write-Progress -Activity "Installing BMAD Method v6" -Completed
+            Write-Progress -Activity "Installing BMAD-c9s" -Completed
             Write-Verbose "Installation completed successfully at: $(Get-Date)"
             exit 0
         } else {
@@ -878,14 +847,14 @@ function global:Main {
             Write-Host "Troubleshooting:" -ForegroundColor Yellow
             Write-Host "  1. Run with -Verbose flag for detailed diagnostics"
             Write-Host "  2. Check file permissions on: $ClaudeDir"
-            Write-Host "  3. Verify source files exist in: $SourceBmadV6Dir"
+            Write-Host "  3. Verify source files exist in: $SourceBmadC9sDir"
             Write-Host "  4. Try running with -Force to reinstall"
             Write-Host ""
             exit 1
         }
     }
     catch {
-        Write-Progress -Activity "Installing BMAD Method v6" -Completed
+        Write-Progress -Activity "Installing BMAD-c9s" -Completed
         Write-Host ""
         Write-Host "===============================================" -ForegroundColor Red
         Write-Host "  Installation Failed" -ForegroundColor Red
@@ -897,8 +866,8 @@ function global:Main {
         Write-Host "  1. Run with -Verbose flag for detailed diagnostics:"
         Write-Host "     .\install-v6.ps1 -Verbose"
         Write-Host ""
-        Write-Host "  2. Check if bmad-v6/ directory exists:"
-        Write-Host "     dir bmad-v6\"
+        Write-Host "  2. Check if bmad-c9s/ directory exists:"
+        Write-Host "     dir bmad-c9s\"
         Write-Host ""
         Write-Host "  3. Verify write permissions:"
         Write-Host "     Test writing to $ClaudeDir"

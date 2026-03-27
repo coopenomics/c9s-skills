@@ -1,0 +1,53 @@
+# BMAD-c9s — статус воркфлоу (хранить в {base}/.c9s/workflow-status.yaml)
+# Сгенерировано: {{TIMESTAMP}}
+# Проект: {{PROJECT_NAME}}
+
+project_name: "{{PROJECT_NAME}}"
+project_type: "{{PROJECT_TYPE}}"
+project_level: {{PROJECT_LEVEL}}
+communication_language: "ru"
+output_language: "ru"
+last_updated: "{{TIMESTAMP}}"
+
+# Статусы: required | optional | recommended | conditional | skipped | путь-к-файлу
+
+workflow_status:
+  - name: product-brief
+    phase: 1
+    status: "optional"
+    description: "Продуктовый бриф"
+
+  - name: brainstorm-project
+    phase: 1
+    status: "optional"
+    description: "Мозговой штурм"
+
+  - name: research
+    phase: 1
+    status: "optional"
+    description: "Исследование рынка"
+
+  - name: prd
+    phase: 2
+    status: "{{PRD_STATUS}}"
+    description: "PRD"
+
+  - name: tech-spec
+    phase: 2
+    status: "{{TECH_SPEC_STATUS}}"
+    description: "Техническое задание"
+
+  - name: create-ux-design
+    phase: 2
+    status: "optional"
+    description: "UX/UI"
+
+  - name: architecture
+    phase: 3
+    status: "{{ARCHITECTURE_STATUS}}"
+    description: "Архитектура"
+
+  - name: solutioning-gate-check
+    phase: 3
+    status: "optional"
+    description: "Проверка архитектуры"
