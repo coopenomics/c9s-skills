@@ -4,8 +4,8 @@
 
 **Фаза:** 2–4
 
-**Выход:** новый файл `requirements/{slug}.md` или `issues/{issue}-requirements/{slug}.md` по [FORMAT](../docs/FORMAT-CAPITAL-GITHUB.md); шаблон `templates/story.template.md`.
+**Выход:** новый файл `requirements/{slug}.md` или `issues/{issue}-requirements/{slug}.md` по [FORMAT](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md); шаблон `templates/story.template.md`.
 
 **Обязательно:** `content_format`, `hash`, `updated_at`.
 
-**Детали:** `bmad-v6/commands/create-story.md`
+**Детали (v6, EN):** `~/.claude/config/bmad/bmad-v6-bundle/commands/create-story.md`

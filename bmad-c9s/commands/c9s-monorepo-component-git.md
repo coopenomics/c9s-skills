@@ -4,6 +4,6 @@
 
 Полная логика: скилл `bmad-c9s/skills/core/c9s-monorepo-component-git/SKILL.md`.
 
-Политика: `bmad-c9s/docs/GIT-COMMITS-POLICY.md`.
+Политика: `~/.claude/config/bmad/GIT-COMMITS-POLICY.md`.
 
 Прямые коммиты в `dev` **запрещены**.

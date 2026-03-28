@@ -10,7 +10,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite, Task
 
 **Фаза:** 4 — Реализация.
 
-**Источник:** `bmad-v6/skills/bmm/developer/SKILL.md`, `commands/dev-story.md`.
+**Источник методологии (v6, EN):** `~/.claude/skills/bmad/bmm/developer/SKILL.md` · сценарий: `~/.claude/config/bmad/bmad-v6-bundle/commands/dev-story.md`.
 
 ---
 
@@ -25,18 +25,18 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite, Task
 
 ## Документы
 
-- [FORMAT-CAPITAL-GITHUB.md](../../../docs/FORMAT-CAPITAL-GITHUB.md)
+- [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)
 - [helpers-ru.md](../../../utils/helpers-ru.md)
-- [GIT-COMMITS-POLICY.md](../../../docs/GIT-COMMITS-POLICY.md)
+- [GIT-COMMITS-POLICY.md](~/.claude/config/bmad/GIT-COMMITS-POLICY.md)
 - Скиллы: [c9s-results-push](../../core/c9s-results-push/SKILL.md), [c9s-monorepo-component-git](../../core/c9s-monorepo-component-git/SKILL.md), [c9s-submit-for-review](../../core/c9s-submit-for-review/SKILL.md)
 
 ---
 
 ## Git (обязательно)
 
-- **Репозиторий результатов:** после правок — **commit + push** по [GIT-COMMITS-POLICY.md](../../../docs/GIT-COMMITS-POLICY.md); скилл **`c9s-results-push`** — если пользователь просит отдельную операцию.
+- **Репозиторий результатов:** после правок — **commit + push** по [GIT-COMMITS-POLICY.md](~/.claude/config/bmad/GIT-COMMITS-POLICY.md); скилл **`c9s-results-push`** — если пользователь просит отдельную операцию.
 - **Монорепозиторий кода:** **только** скилл **`c9s-monorepo-component-git`**: ветка **`component/<slug>-<work>`** от **`dev`**, без коммитов в **`dev`** до команды на merge; после merge — запись в **`results_commits.yaml`** в **репозитории результатов** (`.c9s/` проекта), не в монорепо.
-- **Задачи и время:** [TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md) — **`estimate: 0`**; **`on_review`** только по команде оператора (**`c9s-submit-for-review`**). После своей итерации оставляй **`in_progress`**, не ревью.
+- **Задачи и время:** [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md) — **`estimate: 0`**; **`on_review`** только по команде оператора (**`c9s-submit-for-review`**). После своей итерации оставляй **`in_progress`**, не ревью.
 
 ---
 
@@ -52,7 +52,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite, Task
 ## Ограничения
 
 - Не выдумывать `hash` — для новых сущностей см. helpers. Если создаёшь **новую** **`issues/*.md`** — сразу заполни **`created_by`**, **`submaster`**, **`creators`** из **`c9s-config.yaml` → `username`** (как в [issue.template.md](../../../templates/issue.template.md)).
-- Не смешивать большие логи в чат — переносить в тело **`issues/*.md`** (задача = один промпт, контекст уже там). Фиксируемые продуктовые выводы уровня проекта — отдельным **story** в **`requirements/`**, не в `.c9s/`. Если создаёте story — **`title`** только **русский**, **чёткий заголовок** ([FORMAT §2.2](../../../docs/FORMAT-CAPITAL-GITHUB.md)).
+- Не смешивать большие логи в чат — переносить в тело **`issues/*.md`** (задача = один промпт, контекст уже там). Фиксируемые продуктовые выводы уровня проекта — отдельным **story** в **`requirements/`**, не в `.c9s/`. Если создаёте story — **`title`** только **русский**, **чёткий заголовок** ([FORMAT §2.2](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)).
 
 ---
 

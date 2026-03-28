@@ -18,11 +18,11 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep, TodoWrite
 ## Обязательные ссылки
 
 - [CLAUDE.md](../../../CLAUDE.md) — обзор пакета
-- [docs/FORMAT-CAPITAL-GITHUB.md](../../../docs/FORMAT-CAPITAL-GITHUB.md) — канон путей и frontmatter
+- [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md) — канон путей и frontmatter
 - [utils/helpers-ru.md](../../../utils/helpers-ru.md) — пути, `updated_at`, hash
-- [docs/GIT-COMMITS-POLICY.md](../../../docs/GIT-COMMITS-POLICY.md) — commit/push results и монорепо
-- [docs/TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md) — задачи под документы, `estimate`, `on_review` только по команде оператора
-- Эталон v6 (англ.): `bmad-v6/skills/core/bmad-master/SKILL.md`
+- [GIT-COMMITS-POLICY.md](~/.claude/config/bmad/GIT-COMMITS-POLICY.md) — commit/push results и монорепо
+- [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md) — задачи под документы, `estimate`, `on_review` только по команде оператора
+- Эталон v6 (англ., после install): `~/.claude/skills/bmad/core/bmad-master/SKILL.md` (в репозитории пакета: `bmad-v6/skills/core/bmad-master/SKILL.md`)
 
 ---
 
@@ -32,10 +32,10 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep, TodoWrite
 2. Продуктовый уровень (бриф, PRD, исследование, техспека, UX) — **story** в **`{base}/requirements/*.md`**. Контекст **конкретной** dev-задачи — **в теле** **`{base}/issues/*.md`** (без подпапок `*-requirements/`). В **`{base}/.c9s/`** — лишь **операционка** (например `workflow-status.yaml`, `sprint-status.yaml`).
 3. Обычные роли **не** ставят задаче статус **`done`**. **`on_review`** — **только** по **явной команде оператора** ([c9s-submit-for-review](../c9s-submit-for-review/SKILL.md)); агент **не** переводит в ревью автоматически после своей работы.
 4. Каждое изменение канонического файла — **новый `updated_at`** (см. FORMAT).
-5. У **story** в **`requirements/*.md`** поле **`title`** — **только русский**, формулировка **чёткая и понятная** (см. [CLAUDE.md](../../../CLAUDE.md), [FORMAT §2.2](../../../docs/FORMAT-CAPITAL-GITHUB.md)).
-6. **Репозиторий результатов:** после правок канонических файлов — **`git commit`** и **`git push`** (сообщения на русском), см. [GIT-COMMITS-POLICY.md](../../../docs/GIT-COMMITS-POLICY.md) §1. Скилл [c9s-results-push](../c9s-results-push/SKILL.md) — только для **явной** отдельной команды пользователя.
+5. У **story** в **`requirements/*.md`** поле **`title`** — **только русский**, формулировка **чёткая и понятная** (см. [CLAUDE.md](../../../CLAUDE.md), [FORMAT §2.2](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)).
+6. **Репозиторий результатов:** после правок канонических файлов — **`git commit`** и **`git push`** (сообщения на русском), см. [GIT-COMMITS-POLICY.md](~/.claude/config/bmad/GIT-COMMITS-POLICY.md) §1. Скилл [c9s-results-push](../c9s-results-push/SKILL.md) — только для **явной** отдельной команды пользователя.
 7. **Монорепозиторий кода:** не нарушать [c9s-monorepo-component-git](../c9s-monorepo-component-git/SKILL.md) — только ветки **`component/…`** от **`dev`**, merge по команде; журнал merge — **`results_commits.yaml` в репозитории результатов** (`.c9s/`), не в монорепо.
-8. **Документы (PRD, архитектура, бриф, …):** сначала **`issues/*.md`**, затем **`requirements/*.md`** — [TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md).
+8. **Документы (PRD, архитектура, бриф, …):** сначала **`issues/*.md`**, затем **`requirements/*.md`** — [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md).
 9. **Задачи:** **`estimate: 0`** по умолчанию; в каждой новой **`issues/*.md`** — **`created_by`**, **`submaster`**, **`creators`** = **`username`** из **`c9s-config.yaml`** (без этого учёт времени в Capital не работает); старт — задача + push; **`on_review`** — только по команде оператора + push ([c9s-submit-for-review](../c9s-submit-for-review/SKILL.md)).
 
 ---

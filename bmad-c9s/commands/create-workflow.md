@@ -4,4 +4,4 @@
 
 **Цель:** добавить или изменить воркфлоу в пакете `bmad-c9s` (команда + скилл + ссылка на FORMAT).
 
-**Детали:** `bmad-v6/commands/create-workflow.md`
+**Детали (v6, EN):** `~/.claude/config/bmad/bmad-v6-bundle/commands/create-workflow.md`

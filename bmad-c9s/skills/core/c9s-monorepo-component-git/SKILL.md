@@ -21,7 +21,7 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep, TodoWrite
 3. **`component_slug`** — имя каталога компонента под `components/` (например `desktop`, `controller`), либо значение **`active_component_git_slug`** из `c9s-config.yaml`.
 4. **`work_slug`** — краткий slug от **русского или рабочего названия** задачи/результата (транслит, дефисы, нижний регистр); если одна долгая линия работы на компонент — допустимо **`component/<component_slug>`** без суффикса **только** если так согласовано с пользователем.
 5. **Merge в `dev`** — **только** по **явной команде** пользователя в конце работы (не по собственной инициативе агента).
-6. После успешного merge — записать в **`results_commits.yaml`** (путь по [GIT-COMMITS-POLICY §2.4](../../../docs/GIT-COMMITS-POLICY.md)) **полный SHA**, **`username`** и **`merge_title`** (первая строка merge-коммита), плюс остальные поля по шаблону. Новая запись — **в начало** `commits`. Затем **commit + push** в **git репозитория результатов** для этого файла. При необходимости обновить **`last_merge_to_dev_commit_hash`** в `c9s-config.yaml`.
+6. После успешного merge — записать в **`results_commits.yaml`** (путь по [GIT-COMMITS-POLICY §2.4](~/.claude/config/bmad/GIT-COMMITS-POLICY.md)) **полный SHA**, **`username`** и **`merge_title`** (первая строка merge-коммита), плюс остальные поля по шаблону. Новая запись — **в начало** `commits`. Затем **commit + push** в **git репозитория результатов** для этого файла. При необходимости обновить **`last_merge_to_dev_commit_hash`** в `c9s-config.yaml`.
 
 Остальные скиллы (developer, bmad-master-c9s и т.д.) **не отменяют** эти правила.
 
@@ -29,7 +29,7 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep, TodoWrite
 
 ## Обязательные ссылки
 
-- [docs/GIT-COMMITS-POLICY.md](../../../docs/GIT-COMMITS-POLICY.md)
+- [GIT-COMMITS-POLICY.md](~/.claude/config/bmad/GIT-COMMITS-POLICY.md)
 - [templates/results_commits.template.yaml](../../../templates/results_commits.template.yaml)
 - [config/c9s-config.template.yaml](../../../config/c9s-config.template.yaml) — поля `monorepo_root`, `active_component_git_slug`, `results_commits_log`
 

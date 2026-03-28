@@ -11,7 +11,7 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep, TodoWrite
 
 ## Назначение
 
-**По умолчанию** агент **уже** выполняет **`git commit`** и **`git push`** в репозитории результатов после значимых правок — см. [docs/GIT-COMMITS-POLICY.md](../../../docs/GIT-COMMITS-POLICY.md) §1.
+**По умолчанию** агент **уже** выполняет **`git commit`** и **`git push`** в репозитории результатов после значимых правок — см. [GIT-COMMITS-POLICY.md](~/.claude/config/bmad/GIT-COMMITS-POLICY.md) §1.
 
 Этот скилл нужен, когда пользователь **явно** просит:
 
@@ -25,8 +25,8 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep, TodoWrite
 
 ## Обязательные ссылки
 
-- [docs/GIT-COMMITS-POLICY.md](../../../docs/GIT-COMMITS-POLICY.md)
-- [docs/TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)
+- [GIT-COMMITS-POLICY.md](~/.claude/config/bmad/GIT-COMMITS-POLICY.md)
+- [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)
 - [CLAUDE.md](../../../CLAUDE.md)
 - [helpers-ru.md](../../../utils/helpers-ru.md)
 

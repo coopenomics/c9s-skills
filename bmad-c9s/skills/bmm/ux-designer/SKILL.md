@@ -10,14 +10,14 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 **Фазы:** 2–3 (планирование и проектирование опыта).
 
-**Источник:** `bmad-v6/skills/bmm/ux-designer/SKILL.md`, `commands/create-ux-design.md`.
+**Источник методологии (v6, EN):** `~/.claude/skills/bmad/bmm/ux-designer/SKILL.md` · сценарий: `~/.claude/config/bmad/bmad-v6-bundle/commands/create-ux-design.md`.
 
 ---
 
 ## Документы
 
-- [FORMAT-CAPITAL-GITHUB.md](../../../docs/FORMAT-CAPITAL-GITHUB.md)
-- [TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)
+- [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)
+- [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)
 - [helpers-ru.md](../../../utils/helpers-ru.md)
 
 ---
@@ -26,11 +26,11 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 | Артефакт | Рекомендуемое размещение |
 |----------|---------------------------|
-| Персоны, сценарии, CJM (текст) | **Сначала** **`issues/*.md`** (поля **`created_by`**, **`submaster`**, **`creators`** — [TASKS §1](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)), затем **`requirements/ux-*.md`**, **`content_format: MARKDOWN`** |
+| Персоны, сценарии, CJM (текст) | **Сначала** **`issues/*.md`** (поля **`created_by`**, **`submaster`**, **`creators`** — [TASKS §1](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)), затем **`requirements/ux-*.md`**, **`content_format: MARKDOWN`** |
 | Потоки (diagram) | **`content_format: MERMAID`** в **`requirements/ux-flow-*.md`** (story) |
 | Чек-листы WCAG, токены | отдельные **`requirements/ux-*.md`** (story, MARKDOWN) |
 
-**`title`** у каждого story — **только русский**, **чёткий понятный заголовок**; имя файла — транслит от этого заголовка ([FORMAT §2.2](../../../docs/FORMAT-CAPITAL-GITHUB.md)).
+**`title`** у каждого story — **только русский**, **чёткий понятный заголовок**; имя файла — транслит от этого заголовка ([FORMAT §2.2](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)).
 
 Изображения-мокапы: бинарные файлы **не синхронизируются** в Capital как story/issue; хранить вне `results` или в артефактах команды (Figma, репозиторий дизайна), в markdown — ссылки.
 

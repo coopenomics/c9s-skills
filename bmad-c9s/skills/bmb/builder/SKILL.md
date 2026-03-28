@@ -10,7 +10,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 **Назначение:** расширять пакет **bmad-c9s** — скиллы, шаблоны, команды.
 
-**Источник:** `bmad-v6/skills/bmb/builder/SKILL.md`, `bmad-skills/builder/` при наличии.
+**Источник методологии (v6, EN):** `~/.claude/skills/bmad/bmb/builder/SKILL.md` · опционально репозиторий `bmad-skills/builder/` при открытом пакете.
 
 ---
 
@@ -18,9 +18,9 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 1. Новый скилл: каталог `bmad-c9s/skills/.../SKILL.md` с YAML frontmatter (`name`, `description`, `allowed-tools`).
 2. Текст **на русском**, если не оговорено иное.
-3. Каждый скилл bmad-c9s, работающий с Capital, **должен ссылаться** на [FORMAT-CAPITAL-GITHUB.md](../../../docs/FORMAT-CAPITAL-GITHUB.md).
-4. Скиллы, которые создают или правят **`issues/*.md`**, дополнительно ссылаются на [TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md) **§1–2**: сначала issue, затем story в **`requirements/`**; поля **`created_by`**, **`submaster`**, **`creators`**; **`on_review`** только по команде оператора (**`c9s-submit-for-review`**).
-5. Не дублировать полные главы из v6 — дай ссылку на `bmad-v6/`.
+3. Каждый скилл bmad-c9s, работающий с Capital, **должен ссылаться** на [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md).
+4. Скиллы, которые создают или правят **`issues/*.md`**, дополнительно ссылаются на [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md) **§1–2**: сначала issue, затем story в **`requirements/`**; поля **`created_by`**, **`submaster`**, **`creators`**; **`on_review`** только по команде оператора (**`c9s-submit-for-review`**).
+5. Не дублировать полные главы из v6 — укажи `~/.claude/skills/bmad/…/SKILL.md` или `bmad-v6/…` **только** если workspace — корень `claude-code-bmad-skills`.
 
 ---
 

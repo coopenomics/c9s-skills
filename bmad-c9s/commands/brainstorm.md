@@ -6,4 +6,4 @@
 
 **Выход:** **`requirements/brainstorm-{slug}.md`** (story, `content_format: MARKDOWN`)
 
-**Детали:** `bmad-v6/commands/brainstorm.md`
+**Детали (v6, EN):** `~/.claude/config/bmad/bmad-v6-bundle/commands/brainstorm.md`

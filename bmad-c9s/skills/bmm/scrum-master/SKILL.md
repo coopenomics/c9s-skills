@@ -10,14 +10,14 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 **Фаза:** 4 — Поставка итерациями.
 
-**Источник:** `bmad-v6/skills/bmm/scrum-master/SKILL.md`, `commands/sprint-planning.md`, `create-story.md`.
+**Источник методологии (v6, EN):** `~/.claude/skills/bmad/bmm/scrum-master/SKILL.md` · сценарии: `~/.claude/config/bmad/bmad-v6-bundle/commands/sprint-planning.md`, `create-story.md`.
 
 ---
 
 ## Документы
 
-- [FORMAT-CAPITAL-GITHUB.md](../../../docs/FORMAT-CAPITAL-GITHUB.md)
-- [TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)
+- [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)
+- [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)
 - [helpers-ru.md](../../../utils/helpers-ru.md)
 - Шаблон: [templates/sprint-status.c9s.template.yaml](../../../templates/sprint-status.c9s.template.yaml) → копировать в **`.c9s/sprint-status.yaml`**
 
@@ -29,7 +29,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 |----------|-----|
 | Состав спринта, цели | **`.c9s/sprint-status.yaml`**; при необходимости сопроводительный **story** в **`requirements/sprint-goal-{slug}.md`** |
 | Уточнение состава спринта / формулировок задач | правки **тел** **`issues/*.md`** и при необходимости продуктовых **`requirements/*.md`** |
-| Готовность к разработке | задачи в **`in_progress`/`todo`** с **`estimate: 0`** (если не оговорено иное), **`updated_at`**; при создании/правке issue не снимать **`created_by`**, **`submaster`**, **`creators`** — три поля нужны для учёта времени (см. [TASKS-DOCUMENTS-TIME-POLICY §1](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)) |
+| Готовность к разработке | задачи в **`in_progress`/`todo`** с **`estimate: 0`** (если не оговорено иное), **`updated_at`**; при создании/правке issue не снимать **`created_by`**, **`submaster`**, **`creators`** — три поля нужны для учёта времени (см. [TASKS-DOCUMENTS-TIME-POLICY §1](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)) |
 
 ---
 

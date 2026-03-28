@@ -43,7 +43,7 @@
 1. **Установите скиллы и команды** из корня репозитория `claude-code-bmad-skills`:
    - macOS/Linux: `./install-v6.sh`
    - Windows: `.\install-v6.ps1`  
-   В `~/.claude/` появятся `skills/bmad/`, `commands/bmad/`, `config/bmad/` (копия из `bmad-c9s/`).
+   В `~/.claude/` после `./install-v6.sh`: **v6** — `skills/bmad/`, **c9s** — `skills/bmad-c9s/`, команды-обёртки — `commands/bmad/`, конфиг и шаблоны — `config/bmad/` (в т.ч. `bmad-v6-bundle/commands/` — полные тексты команд v6).
 
 2. **Откройте в IDE репозиторий результатов** (тот, где лежит дерево `results/` или тестовый клон) — либо сам `claude-code-bmad-skills`, если гоняете только методологию на пустой заготовке.
 
@@ -51,7 +51,7 @@
    `bmad-c9s/config/c9s-config.template.yaml` → в **корень репозитория результатов** как `c9s-config.yaml` и заполните:
    - `results_root` — абсолютный путь к корню клона с `results/`
    - `active_project_slug` — имя папки проекта первого уровня под `results/` (как в Capital)
-   - `coopname`, **`username`** — для новых **`issues/*.md`** в frontmatter: **`created_by`**, **`submaster`**, **`creators`** (см. [TASKS-DOCUMENTS-TIME-POLICY.md](docs/TASKS-DOCUMENTS-TIME-POLICY.md) §1)
+   - `coopname`, **`username`** — для новых **`issues/*.md`** в frontmatter: **`created_by`**, **`submaster`**, **`creators`** (см. [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md) §1)
 
 4. **Перезапустите Claude Code** (или Cursor с подключёнными скиллами), откройте проект с `c9s-config.yaml`.
 
@@ -124,7 +124,7 @@
 ### Сценарий D — От агента к мастеру (два шага)
 
 1. Агент закончил черновик — задача остаётся в **`in_progress`** (оператор читает PRD, правит вручную, просит доработки и т.д.).
-2. Когда оператор **готов** передать задачу мастеру: явная команда (**`/c9s-submit-for-review`**, «отправь задачу … на ревью») → агент ставит **`on_review`**, **`updated_at`**, commit/push в results ([TASKS-DOCUMENTS-TIME-POLICY.md](docs/TASKS-DOCUMENTS-TIME-POLICY.md) §2).
+2. Когда оператор **готов** передать задачу мастеру: явная команда (**`/c9s-submit-for-review`**, «отправь задачу … на ревью») → агент ставит **`on_review`**, **`updated_at`**, commit/push в results ([TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md) §2).
 3. Мастер вызывает **`c9s-master-review`**: **`done`** или возврат в **`in_progress`**.
 
 ## Команды (slash)
@@ -147,7 +147,7 @@
 | Файл | Содержание |
 |------|------------|
 | [CLAUDE.md](CLAUDE.md) | Обзор пакета, таблица фаз, правила хранения |
-| [docs/FORMAT-CAPITAL-GITHUB.md](docs/FORMAT-CAPITAL-GITHUB.md) | Канон путей и frontmatter |
+| [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md) | Канон путей и frontmatter |
 | [utils/helpers-ru.md](utils/helpers-ru.md) | Разрешение корня проекта, `updated_at`, hash |
 | [commands/_README.md](commands/_README.md) | Общие шаги перед работой по командам |
 

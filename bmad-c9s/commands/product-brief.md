@@ -6,4 +6,4 @@
 
 **Выход:** **`requirements/product-brief-{slug}.md`** (story, `content_format: MARKDOWN`); при необходимости — ключевые тезисы дублировать/сжать в теле **`project.md`** + `updated_at`.
 
-**Детали:** `bmad-v6/commands/product-brief.md`
+**Детали (v6, EN):** `~/.claude/config/bmad/bmad-v6-bundle/commands/product-brief.md`

@@ -10,14 +10,14 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 **Фаза:** 1 (и ретроспективы в 4 по запросу).
 
-**Источник:** `bmad-v6/skills/cis/creative-intelligence/SKILL.md`.
+**Источник методологии (v6, EN):** `~/.claude/skills/bmad/cis/creative-intelligence/SKILL.md`.
 
 ---
 
 ## Документы
 
-- [FORMAT-CAPITAL-GITHUB.md](../../../docs/FORMAT-CAPITAL-GITHUB.md)
-- [TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)
+- [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)
+- [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)
 - [helpers-ru.md](../../../utils/helpers-ru.md)
 
 ---
@@ -26,12 +26,12 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 | Сессия | Куда писать |
 |--------|-------------|
-| Мозговой штурм, SWOT, варианты решений | **Сначала** **`issues/*.md`** на сессию (например «Мозговой штурм по …») с полями **`created_by`**, **`submaster`**, **`creators`** ([TASKS §1](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)), **затем** **`requirements/…md`** — `type: story`, **`content_format: MARKDOWN`** |
+| Мозговой штурм, SWOT, варианты решений | **Сначала** **`issues/*.md`** на сессию (например «Мозговой штурм по …») с полями **`created_by`**, **`submaster`**, **`creators`** ([TASKS §1](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)), **затем** **`requirements/…md`** — `type: story`, **`content_format: MARKDOWN`** |
 | Отобранные идеи как отдельные требования | при необходимости отдельная **задача** (те же поля учёта) + **`requirements/idea-*.md`** |
 
-Не начинать оформленную сессию **только** story без **issue** — см. [TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md).
+Не начинать оформленную сессию **только** story без **issue** — см. [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md).
 
-**`title`** у каждого story — **только русский**, **чёткий заголовок**; имя файла — транслит от заголовка ([FORMAT §2.2](../../../docs/FORMAT-CAPITAL-GITHUB.md)), а не голые префиксы `brainstorm-`/`idea-` без смысла в **`title`**.
+**`title`** у каждого story — **только русский**, **чёткий заголовок**; имя файла — транслит от заголовка ([FORMAT §2.2](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)), а не голые префиксы `brainstorm-`/`idea-` без смысла в **`title`**.
 
 ---
 

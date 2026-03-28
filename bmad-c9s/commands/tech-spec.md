@@ -6,4 +6,4 @@
 
 **Выход:** **`requirements/tech-spec-*.md`** (story, `content_format: MARKDOWN`); уточнения и версии — правки того же или новых story, не `.c9s/`.
 
-**Детали:** `bmad-v6/commands/tech-spec.md`
+**Детали (v6, EN):** `~/.claude/config/bmad/bmad-v6-bundle/commands/tech-spec.md`

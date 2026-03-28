@@ -19,7 +19,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 ## Ссылки
 
-- [FORMAT-CAPITAL-GITHUB.md](../../../docs/FORMAT-CAPITAL-GITHUB.md) — статусы, поля issue
+- [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md) — статусы, поля issue
 - [helpers-ru.md](../../../utils/helpers-ru.md) — пути к `issues/*.md`
 
 ---

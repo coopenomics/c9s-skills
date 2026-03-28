@@ -13,15 +13,15 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep, TodoWrite
 
 Выполнять **только** после **явного** указания **оператора** (человека): он прочитал/проверил результат (PRD, правки, код в контексте задачи и т.д.) и **сознательно** готов передать задачу мастеру в очередь ревью.
 
-**Запрещено:** переводить в **`on_review`** «потому что агент закончил черновик» — см. [docs/TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md) §2.
+**Запрещено:** переводить в **`on_review`** «потому что агент закончил черновик» — см. [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md) §2.
 
 ---
 
 ## Обязательные ссылки
 
-- [TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)
-- [FORMAT-CAPITAL-GITHUB.md](../../../docs/FORMAT-CAPITAL-GITHUB.md)
-- [GIT-COMMITS-POLICY.md](../../../docs/GIT-COMMITS-POLICY.md)
+- [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)
+- [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)
+- [GIT-COMMITS-POLICY.md](~/.claude/config/bmad/GIT-COMMITS-POLICY.md)
 
 ---
 

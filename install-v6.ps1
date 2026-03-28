@@ -1,8 +1,8 @@
 ###############################################################################
-# BMAD-c9s (Coopenomics) for Claude Code — PowerShell installer
+# BMAD v6 + BMAD-c9s (Coopenomics) — PowerShell installer
 #
-# Устанавливает скиллы и команды из bmad-c9s/. Каталог bmad-v6/ в репозитории
-# не изменяется; при наличии копируется helpers.md как helpers-bmad-v6-en.md.
+# Соответствует install-v6.sh: v6 → skills/bmad, c9s → skills/bmad-c9s,
+# bmad-v6-bundle в config/bmad, команды c9s → commands/bmad.
 #
 # Supports: PowerShell 5.1+ (Windows default) and PowerShell 6+ (Core)
 #
@@ -89,7 +89,7 @@ $ErrorActionPreference = "Stop"
 # Configuration
 ###############################################################################
 
-$BmadVersion = "1.0.0"
+$BmadVersion = "1.1.0"
 
 # PowerShell version detection
 $PSVersion = $PSVersionTable.PSVersion.Major
@@ -236,13 +236,16 @@ if ($IsWindows -or $env:OS -match "Windows" -or (-not (Test-Path variable:IsWind
 
 $ClaudeDir = Join-Path $HomeDir ".claude"
 $BmadConfigDir = Join-PathCompat $ClaudeDir "config" "bmad"
+$BmadV6BundleDir = Join-PathCompat $BmadConfigDir "bmad-v6-bundle"
 $BmadSkillsDir = Join-PathCompat $ClaudeDir "skills" "bmad"
+$BmadC9sSkillsDir = Join-PathCompat $ClaudeDir "skills" "bmad-c9s"
 $BmadCommandsDir = Join-PathCompat $ClaudeDir "commands" "bmad"
 $ScriptDir = $PSScriptRoot
 
-# Source directories (primary: bmad-c9s; bmad-v6 only for optional EN helpers)
+# Source directories
 $SourceBmadC9sDir = Join-Path $ScriptDir "bmad-c9s"
 $SourceBmadV6Dir = Join-Path $ScriptDir "bmad-v6"
+$SourceV6SkillsDir = Join-PathCompat $SourceBmadV6Dir "skills"
 $SourceSkillsDir = Join-PathCompat $SourceBmadC9sDir "skills"
 $SourceConfigDir = Join-PathCompat $SourceBmadC9sDir "config"
 $SourceTemplatesDir = Join-PathCompat $SourceBmadC9sDir "templates"
@@ -286,6 +289,10 @@ function global:Test-Prerequisites {
         Write-Success "Found source directory: $SourceBmadC9sDir"
     }
 
+    if (-not (Test-Path $SourceV6SkillsDir)) {
+        $errors += "BMAD v6 skills not found: $SourceV6SkillsDir (required for combined install)"
+    }
+
     # Check required source subdirectories
     $requiredDirs = @{
         "skills" = $SourceSkillsDir
@@ -317,9 +324,9 @@ function global:Test-Prerequisites {
     }
 
     # Check if already installed
-    $bmadMasterPath = Join-PathCompat $BmadSkillsDir "core" "bmad-master-c9s" "SKILL.md"
+    $bmadMasterPath = Join-PathCompat $BmadC9sSkillsDir "core" "bmad-master-c9s" "SKILL.md"
     if ((Test-Path $bmadMasterPath) -and -not $Force) {
-        Write-Warning "BMAD-c9s is already installed at: $BmadSkillsDir"
+        Write-Warning "BMAD-c9s is already installed at: $BmadC9sSkillsDir"
         Write-Host ""
         Write-Host "Options:" -ForegroundColor Yellow
         Write-Host "  1. Run with -Force to reinstall"
@@ -356,12 +363,13 @@ function global:Test-Prerequisites {
 ###############################################################################
 
 function global:Uninstall-BmadV6 {
-    Write-Header "BMAD-c9s v$BmadVersion — удаление"
+    Write-Header "BMAD v6 + c9s v$BmadVersion — удаление"
 
-    Write-Info "Checking for BMAD-c9s installation..."
+    Write-Info "Checking for BMAD installation..."
 
     $dirsToRemove = @(
         $BmadSkillsDir,
+        $BmadC9sSkillsDir,
         $BmadCommandsDir,
         $BmadConfigDir
     )
@@ -375,7 +383,7 @@ function global:Uninstall-BmadV6 {
     }
 
     if (-not $found) {
-        Write-Warning "BMAD-c9s is not installed under ~/.claude/.../bmad"
+        Write-Warning "BMAD installation not found under ~/.claude (skills/bmad, skills/bmad-c9s, config/bmad)"
         Write-Host "Nothing to uninstall."
         exit 0
     }
@@ -425,30 +433,38 @@ function global:Uninstall-BmadV6 {
 ###############################################################################
 
 function global:New-Directories {
-    Write-Progress -Activity "Installing BMAD-c9s" -Status "Creating directory structure..." -PercentComplete 0
+    Write-Progress -Activity "Installing BMAD v6 + c9s" -Status "Creating directory structure..." -PercentComplete 0
     Write-Info "Creating directory structure..."
 
     try {
-        # Claude Code directories - Skills
         @("core", "bmm", "bmb", "cis") | ForEach-Object {
             $skillDir = Join-Path $BmadSkillsDir $_
-            if ($PSCmdlet.ShouldProcess($skillDir, "Create directory")) {
-                Write-Verbose "Creating skill directory: $skillDir"
+            if ($PSCmdlet.ShouldProcess($skillDir, "Create v6 skill directory")) {
                 New-Item -ItemType Directory -Force -Path $skillDir -ErrorAction Stop | Out-Null
+            }
+            $c9sDir = Join-Path $BmadC9sSkillsDir $_
+            if ($PSCmdlet.ShouldProcess($c9sDir, "Create c9s skill directory")) {
+                New-Item -ItemType Directory -Force -Path $c9sDir -ErrorAction Stop | Out-Null
             }
         }
 
-        # Claude Code directories - Config
         @("agents", "templates") | ForEach-Object {
             $configDir = Join-Path $BmadConfigDir $_
-            if ($PSCmdlet.ShouldProcess($configDir, "Create directory")) {
-                Write-Verbose "Creating config directory: $configDir"
+            if ($PSCmdlet.ShouldProcess($configDir, "Create config directory")) {
                 New-Item -ItemType Directory -Force -Path $configDir -ErrorAction Stop | Out-Null
             }
         }
 
+        @("commands", "templates", "utils") | ForEach-Object {
+            $bundleSub = Join-Path $BmadV6BundleDir $_
+            if ($PSCmdlet.ShouldProcess($bundleSub, "Create bmad-v6-bundle subdirectory")) {
+                New-Item -ItemType Directory -Force -Path $bundleSub -ErrorAction Stop | Out-Null
+            }
+        }
+
         Write-Success "Directory structure created"
-        Write-Verbose "  Skills: $BmadSkillsDir"
+        Write-Verbose "  Skills v6: $BmadSkillsDir"
+        Write-Verbose "  Skills c9s: $BmadC9sSkillsDir"
         Write-Verbose "  Config: $BmadConfigDir"
     }
     catch {
@@ -459,88 +475,101 @@ function global:New-Directories {
 }
 
 function global:Install-Skills {
-    Write-Progress -Activity "Installing BMAD-c9s" -Status "Installing skills..." -PercentComplete 20
-    Write-Info "Installing BMAD-c9s skills..."
+    Write-Progress -Activity "Installing BMAD v6 + c9s" -Status "Installing skills..." -PercentComplete 20
+    Write-Info "Installing BMAD v6 skills → $BmadSkillsDir ..."
 
-    $skillComponents = @(
-        @{
-            Name = "Core Skills"
-            SourcePath = Join-PathCompat $SourceSkillsDir "core"
-            DestPath = Join-Path $BmadSkillsDir "core"
-            Required = $true
-        },
-        @{
-            Name = "BMM Skills"
-            SourcePath = Join-PathCompat $SourceSkillsDir "bmm"
-            DestPath = Join-Path $BmadSkillsDir "bmm"
-            Required = $true
-        },
-        @{
-            Name = "BMB Skills"
-            SourcePath = Join-PathCompat $SourceSkillsDir "bmb"
-            DestPath = Join-Path $BmadSkillsDir "bmb"
-            Required = $false
-        },
-        @{
-            Name = "CIS Skills"
-            SourcePath = Join-PathCompat $SourceSkillsDir "cis"
-            DestPath = Join-Path $BmadSkillsDir "cis"
-            Required = $false
-        }
+    $v6Components = @(
+        @{ Name = "v6 Core"; Sub = "core"; Required = $true }
+        @{ Name = "v6 BMM"; Sub = "bmm"; Required = $true }
+        @{ Name = "v6 BMB"; Sub = "bmb"; Required = $false }
+        @{ Name = "v6 CIS"; Sub = "cis"; Required = $false }
     )
-
-    foreach ($component in $skillComponents) {
-        $sourcePath = $component.SourcePath
-        $destPath = $component.DestPath
-        $componentName = $component.Name
-        $required = $component.Required
-
-        Write-Verbose "Installing $componentName from: $sourcePath"
-
+    foreach ($c in $v6Components) {
+        $sourcePath = Join-PathCompat $SourceV6SkillsDir $c.Sub
+        $destPath = Join-Path $BmadSkillsDir $c.Sub
         if (Test-Path $sourcePath) {
-            try {
-                $sourcePattern = Join-Path $sourcePath "*"
-                if ($PSCmdlet.ShouldProcess($destPath, "Copy $componentName")) {
-                    Copy-ItemSafe -SourcePath $sourcePattern -DestinationPath $destPath -Recurse -Force -ErrorContext "$componentName installation"
-                    Write-Success "$componentName installed"
-                    Write-Verbose "  Copied to: $destPath"
-                }
+            $sourcePattern = Join-Path $sourcePath "*"
+            if ($PSCmdlet.ShouldProcess($destPath, "Copy $($c.Name)")) {
+                Copy-ItemSafe -SourcePath $sourcePattern -DestinationPath $destPath -Recurse -Force -ErrorContext "$($c.Name) installation"
+                Write-Success "$($c.Name) installed"
             }
-            catch {
-                if ($required) {
-                    throw
-                } else {
-                    Write-Warning "Optional $componentName could not be installed"
-                    Write-Verbose "  Error: $($_.Exception.Message)"
-                }
+        } elseif ($c.Required) {
+            throw "Required v6 skills missing: $sourcePath"
+        }
+    }
+
+    Write-Info "Installing BMAD-c9s skills → $BmadC9sSkillsDir ..."
+    $c9sComponents = @(
+        @{ Name = "c9s Core"; Sub = "core"; Required = $true }
+        @{ Name = "c9s BMM"; Sub = "bmm"; Required = $true }
+        @{ Name = "c9s BMB"; Sub = "bmb"; Required = $false }
+        @{ Name = "c9s CIS"; Sub = "cis"; Required = $false }
+    )
+    foreach ($c in $c9sComponents) {
+        $sourcePath = Join-PathCompat $SourceSkillsDir $c.Sub
+        $destPath = Join-Path $BmadC9sSkillsDir $c.Sub
+        if (Test-Path $sourcePath) {
+            $sourcePattern = Join-Path $sourcePath "*"
+            if ($PSCmdlet.ShouldProcess($destPath, "Copy $($c.Name)")) {
+                Copy-ItemSafe -SourcePath $sourcePattern -DestinationPath $destPath -Recurse -Force -ErrorContext "$($c.Name) installation"
+                Write-Success "$($c.Name) installed"
             }
-        } else {
-            if ($required) {
-                Write-ErrorMsg "$componentName not found at: $sourcePath"
-                Write-ErrorMsg "Installation cannot continue"
-                throw "Required component missing: $componentName"
-            } else {
-                Write-Verbose "$componentName not found (optional): $sourcePath"
-            }
+        } elseif ($c.Required) {
+            throw "Required c9s skills missing: $sourcePath"
         }
     }
 }
 
+function global:Install-V6Bundle {
+    Write-Progress -Activity "Installing BMAD v6 + c9s" -Status "bmad-v6-bundle..." -PercentComplete 32
+    Write-Info "Copying BMAD v6 commands/templates/utils → bmad-v6-bundle..."
+    $v6Cmd = Join-Path $SourceBmadV6Dir "commands"
+    if (Test-Path $v6Cmd) {
+        $pattern = Join-Path $v6Cmd "*.md"
+        Copy-ItemSafe -SourcePath $pattern -DestinationPath (Join-Path $BmadV6BundleDir "commands") -Force -ErrorContext "v6 bundle commands"
+    }
+    $v6Tpl = Join-Path $SourceBmadV6Dir "templates"
+    if (Test-Path $v6Tpl) {
+        $pattern = Join-Path $v6Tpl "*"
+        Copy-ItemSafe -SourcePath $pattern -DestinationPath (Join-Path $BmadV6BundleDir "templates") -Force -ErrorContext "v6 bundle templates"
+    }
+    $v6Helpers = Join-PathCompat $SourceBmadV6Dir "utils" "helpers.md"
+    if (Test-Path $v6Helpers) {
+        Copy-ItemSafe -SourcePath $v6Helpers -DestinationPath (Join-Path $BmadV6BundleDir "utils" "helpers.md") -Force -ErrorContext "v6 bundle helpers"
+    }
+    Write-Success "bmad-v6-bundle updated"
+}
+
 function global:Install-Config {
-    Write-Progress -Activity "Installing BMAD-c9s" -Status "Installing configuration..." -PercentComplete 40
-    Write-Info "Installing BMAD-c9s configuration template..."
+    Write-Progress -Activity "Installing BMAD v6 + c9s" -Status "Installing configuration..." -PercentComplete 40
+    Write-Info "Installing configuration (v6 + c9s)..."
 
     try {
+        $V6ConfigTemplate = Join-PathCompat $SourceBmadV6Dir "config" "config.template.yaml"
+        $V6ConfigDest = Join-Path $BmadConfigDir "config.yaml"
+        if ((Test-Path $V6ConfigTemplate) -and -not (Test-Path $V6ConfigDest)) {
+            $raw = Get-Content -Path $V6ConfigTemplate -Raw -ErrorAction Stop
+            $userName = if ($env:USERNAME) { $env:USERNAME } else { $env:USER }
+            $raw = $raw -replace '\{\{USER_NAME\}\}', $userName
+            if ($PSCmdlet.ShouldProcess($V6ConfigDest, "Write BMAD v6 config.yaml")) {
+                Set-Content -Path $V6ConfigDest -Value $raw -Encoding UTF8 -ErrorAction Stop
+                Write-Success "config.yaml created (BMAD v6)"
+            }
+        } elseif (Test-Path $V6ConfigDest) {
+            Write-Verbose "config.yaml exists — not overwriting"
+        }
+
+        $V6ProjectTpl = Join-PathCompat $SourceBmadV6Dir "config" "project-config.template.yaml"
+        if (Test-Path $V6ProjectTpl) {
+            Copy-ItemSafe -SourcePath $V6ProjectTpl -DestinationPath (Join-Path $BmadConfigDir "project-config.template.yaml") -Force -ErrorContext "v6 project-config template"
+        }
+
         $C9sConfigTemplatePath = Join-PathCompat $SourceConfigDir "c9s-config.template.yaml"
         $C9sConfigDestPath = Join-Path $BmadConfigDir "c9s-config.template.yaml"
-
-        Write-Verbose "Config template: $C9sConfigTemplatePath"
-        Write-Verbose "Config destination: $C9sConfigDestPath"
-
         if (Test-Path $C9sConfigTemplatePath) {
             if ($PSCmdlet.ShouldProcess($C9sConfigDestPath, "Copy c9s config template")) {
                 Copy-ItemSafe -SourcePath $C9sConfigTemplatePath -DestinationPath $C9sConfigDestPath -Force -ErrorContext "c9s config template"
-                Write-Success "c9s-config.template.yaml installed (copy to your results repo as c9s-config.yaml)"
+                Write-Success "c9s-config.template.yaml installed"
             }
         } else {
             Write-Warning "c9s-config.template.yaml not found at: $C9sConfigTemplatePath"
@@ -553,24 +582,25 @@ function global:Install-Config {
 }
 
 function global:Install-Templates {
-    Write-Progress -Activity "Installing BMAD-c9s" -Status "Installing templates..." -PercentComplete 60
-    Write-Info "Installing templates..."
+    Write-Progress -Activity "Installing BMAD v6 + c9s" -Status "Installing templates..." -PercentComplete 60
+    Write-Info "templates/: v6 base, then c9s overwrites same filenames..."
 
     try {
         $TemplatesDestPath = Join-Path $BmadConfigDir "templates"
-
-        Write-Verbose "Templates source: $SourceTemplatesDir"
-        Write-Verbose "Templates destination: $TemplatesDestPath"
-
+        $V6Templates = Join-Path $SourceBmadV6Dir "templates"
+        if (Test-Path $V6Templates) {
+            $templatePattern = Join-Path $V6Templates "*"
+            if ($PSCmdlet.ShouldProcess($TemplatesDestPath, "Copy v6 templates")) {
+                Copy-ItemSafe -SourcePath $templatePattern -DestinationPath $TemplatesDestPath -Force -ErrorContext "v6 templates"
+                Write-Success "v6 templates copied (base)"
+            }
+        }
         if (Test-Path $SourceTemplatesDir) {
             $templatePattern = Join-Path $SourceTemplatesDir "*"
-            if ($PSCmdlet.ShouldProcess($TemplatesDestPath, "Copy templates")) {
-                Copy-ItemSafe -SourcePath $templatePattern -DestinationPath $TemplatesDestPath -Force -ErrorContext "templates"
-                Write-Success "Templates installed"
-                Write-Verbose "  Copied to: $TemplatesDestPath"
+            if ($PSCmdlet.ShouldProcess($TemplatesDestPath, "Copy c9s templates (overwrite)")) {
+                Copy-ItemSafe -SourcePath $templatePattern -DestinationPath $TemplatesDestPath -Force -ErrorContext "c9s templates"
+                Write-Success "c9s templates applied (overwrite matching names)"
             }
-        } else {
-            Write-Warning "Templates not found at: $SourceTemplatesDir"
         }
     }
     catch {
@@ -580,16 +610,30 @@ function global:Install-Templates {
 }
 
 function global:Install-Utils {
-    Write-Progress -Activity "Installing BMAD-c9s" -Status "Installing docs and helpers..." -PercentComplete 70
-    Write-Info "Installing docs and helpers (c9s)..."
+    Write-Progress -Activity "Installing BMAD v6 + c9s" -Status "Installing docs and helpers..." -PercentComplete 70
+    Write-Info "Installing helpers and c9s docs..."
 
     try {
+        $V6Helpers = Join-PathCompat $SourceBmadV6Dir "utils" "helpers.md"
+        $V6HelpersRef = Join-Path $BmadConfigDir "helpers-bmad-v6-en.md"
+        if (Test-Path $V6Helpers) {
+            if ($PSCmdlet.ShouldProcess($V6HelpersRef, "Copy BMAD v6 helpers (reference EN)")) {
+                Copy-ItemSafe -SourcePath $V6Helpers -DestinationPath $V6HelpersRef -Force -ErrorContext "v6 helpers EN ref"
+                Write-Success "helpers-bmad-v6-en.md (methodology reference)"
+            }
+        }
+
         $HelpersRuPath = Join-PathCompat $SourceUtilsDir "helpers-ru.md"
         $HelpersRuDest = Join-Path $BmadConfigDir "helpers-ru.md"
+        $HelpersPrimary = Join-Path $BmadConfigDir "helpers.md"
         if (Test-Path $HelpersRuPath) {
             if ($PSCmdlet.ShouldProcess($HelpersRuDest, "Copy helpers-ru.md")) {
                 Copy-ItemSafe -SourcePath $HelpersRuPath -DestinationPath $HelpersRuDest -Force -ErrorContext "helpers-ru"
                 Write-Success "helpers-ru.md installed"
+            }
+            if ($PSCmdlet.ShouldProcess($HelpersPrimary, "Copy helpers.md from c9s helpers-ru")) {
+                Copy-ItemSafe -SourcePath $HelpersRuPath -DestinationPath $HelpersPrimary -Force -ErrorContext "helpers primary"
+                Write-Success "helpers.md = c9s rules (copy of helpers-ru)"
             }
         } else {
             Write-Warning "helpers-ru.md not found at: $HelpersRuPath"
@@ -604,6 +648,17 @@ function global:Install-Utils {
             }
         }
 
+        foreach ($docName in @("TASKS-DOCUMENTS-TIME-POLICY.md", "GIT-COMMITS-POLICY.md")) {
+            $srcDoc = Join-PathCompat $SourceC9sDocsDir $docName
+            $dstDoc = Join-Path $BmadConfigDir $docName
+            if (Test-Path $srcDoc) {
+                if ($PSCmdlet.ShouldProcess($dstDoc, "Copy $docName")) {
+                    Copy-ItemSafe -SourcePath $srcDoc -DestinationPath $dstDoc -Force -ErrorContext "c9s doc $docName"
+                    Write-Success "$docName installed"
+                }
+            }
+        }
+
         $ClaudeSrc = Join-Path $SourceBmadC9sDir "CLAUDE.md"
         $ClaudeDest = Join-Path $BmadConfigDir "CLAUDE-bmad-c9s.md"
         if (Test-Path $ClaudeSrc) {
@@ -611,17 +666,6 @@ function global:Install-Utils {
                 Copy-ItemSafe -SourcePath $ClaudeSrc -DestinationPath $ClaudeDest -Force -ErrorContext "CLAUDE overview"
                 Write-Success "CLAUDE-bmad-c9s.md installed"
             }
-        }
-
-        $V6Helpers = Join-PathCompat $SourceBmadV6Dir "utils" "helpers.md"
-        $V6HelpersDest = Join-Path $BmadConfigDir "helpers-bmad-v6-en.md"
-        if (Test-Path $V6Helpers) {
-            if ($PSCmdlet.ShouldProcess($V6HelpersDest, "Copy BMAD v6 EN helpers (reference)")) {
-                Copy-ItemSafe -SourcePath $V6Helpers -DestinationPath $V6HelpersDest -Force -ErrorContext "v6 helpers EN"
-                Write-Success "helpers-bmad-v6-en.md (BMAD v6 reference) installed"
-            }
-        } else {
-            Write-Verbose "bmad-v6/utils/helpers.md not found — skipping EN reference"
         }
     }
     catch {
@@ -631,7 +675,7 @@ function global:Install-Utils {
 }
 
 function global:Install-Commands {
-    Write-Progress -Activity "Installing BMAD-c9s" -Status "Installing slash commands..." -PercentComplete 80
+    Write-Progress -Activity "Installing BMAD v6 + c9s" -Status "Installing slash commands..." -PercentComplete 80
     Write-Info "Installing slash commands from bmad-c9s/commands..."
 
     try {
@@ -668,14 +712,22 @@ function global:Install-Commands {
 }
 
 function global:Test-Installation {
-    Write-Progress -Activity "Installing BMAD-c9s" -Status "Verifying installation..." -PercentComplete 90
+    Write-Progress -Activity "Installing BMAD v6 + c9s" -Status "Verifying installation..." -PercentComplete 90
     Write-Info "Verifying installation..."
 
     $errors = 0
     $checks = @(
         @{
+            Name = "bmad-master (v6) skill"
+            Path = Join-PathCompat $BmadSkillsDir "core" "bmad-master" "SKILL.md"
+        },
+        @{
             Name = "bmad-master-c9s skill"
-            Path = Join-PathCompat $BmadSkillsDir "core" "bmad-master-c9s" "SKILL.md"
+            Path = Join-PathCompat $BmadC9sSkillsDir "core" "bmad-master-c9s" "SKILL.md"
+        },
+        @{
+            Name = "bmad-v6-bundle create-story"
+            Path = Join-PathCompat $BmadV6BundleDir "commands" "create-story.md"
         },
         @{
             Name = "c9s config template"
@@ -722,16 +774,15 @@ function global:Test-Installation {
 }
 
 function global:Show-NextSteps {
-    Write-Header "BMAD-c9s — установка завершена"
+    Write-Header "BMAD v6 + BMAD-c9s — установка завершена"
 
-    Write-Host "[SUCCESS] BMAD-c9s v$BmadVersion (Coopenomics) установлен." -ForegroundColor Green
+    Write-Host "[SUCCESS] BMAD v6 + BMAD-c9s v$BmadVersion установлены." -ForegroundColor Green
     Write-Host ""
-    Write-Host "Каталоги:"
-    Write-Host "  Skills:   $BmadSkillsDir"
-    Write-Host "  Commands: $BmadCommandsDir"
-    Write-Host "  Config:   $BmadConfigDir"
-    Write-Host ""
-    Write-Host "Источник: bmad-c9s/ (bmad-v6/ в репозитории не изменяется)."
+    Write-Host "Скиллы:"
+    Write-Host "  v6:   $BmadSkillsDir"
+    Write-Host "  c9s:  $BmadC9sSkillsDir"
+    Write-Host "Команды (обёртки c9s): $BmadCommandsDir"
+    Write-Host "Конфиг: $BmadConfigDir (в т.ч. bmad-v6-bundle/commands для полных текстов v6)"
     Write-Host ""
     Write-Host "Дальше:"
     Write-Host "  1. Перезапустите Claude Code"
@@ -747,32 +798,35 @@ function global:Show-NextSteps {
     Write-Host "Проверка:"
 
     if ($IsWindows -or $env:OS -match "Windows" -or (-not (Test-Path variable:IsWindows))) {
-        Write-Host "  dir `"$BmadSkillsDir\core\bmad-master-c9s\SKILL.md`""
+        Write-Host "  dir `"$BmadSkillsDir\core\bmad-master\SKILL.md`""
+        Write-Host "  dir `"$BmadC9sSkillsDir\core\bmad-master-c9s\SKILL.md`""
         Write-Host "  dir `"$BmadCommandsDir\c9s-init.md`""
     } else {
-        Write-Host "  ls -la ~/.claude/skills/bmad/core/bmad-master-c9s/SKILL.md"
+        Write-Host "  ls -la ~/.claude/skills/bmad/core/bmad-master/SKILL.md"
+        Write-Host "  ls -la ~/.claude/skills/bmad-c9s/core/bmad-master-c9s/SKILL.md"
         Write-Host "  ls -la ~/.claude/commands/bmad/c9s-init.md"
     }
 
     Write-Host ""
     Write-Host "Исходники пакета: $SourceBmadC9sDir"
     Write-Host ""
-    Write-Host "[OK] BMAD-c9s готов." -ForegroundColor Green
+    Write-Host "[OK] BMAD v6 + c9s готовы." -ForegroundColor Green
 }
 
 function global:Show-WhatIfSummary {
     Write-Header "Installation Summary (Dry-Run) — BMAD-c9s"
 
-    Write-Host "Would install BMAD-c9s v$BmadVersion from: $SourceBmadC9sDir"
-    Write-Host "  Skills:   $BmadSkillsDir"
+    Write-Host "Would install BMAD v6 + BMAD-c9s v$BmadVersion"
+    Write-Host "  Skills v6: $BmadSkillsDir"
+    Write-Host "  Skills c9s: $BmadC9sSkillsDir"
     Write-Host "  Commands: $BmadCommandsDir"
-    Write-Host "  Config:   $BmadConfigDir"
+    Write-Host "  Config: $BmadConfigDir + bmad-v6-bundle"
     Write-Host ""
     Write-Host "Components:"
-    Write-Host "  [*] Skills (core/bmm/bmb/cis) from bmad-c9s/skills"
-    Write-Host "  [*] Slash commands from bmad-c9s/commands"
-    Write-Host "  [*] c9s-config.template.yaml, templates, helpers-ru, docs"
-    Write-Host "  [*] Optional: helpers-bmad-v6-en.md if bmad-v6/utils/helpers.md exists"
+    Write-Host "  [*] Skills from bmad-v6/skills and bmad-c9s/skills"
+    Write-Host "  [*] bmad-v6-bundle (commands, templates, utils)"
+    Write-Host "  [*] config.yaml (v6), c9s-config.template.yaml, merged templates"
+    Write-Host "  [*] helpers.md (v6), helpers-ru, slash commands from bmad-c9s/commands"
     Write-Host ""
     Write-Host "To perform actual installation, run without -WhatIf"
 }
@@ -794,7 +848,7 @@ function global:Main {
         return
     }
 
-    Write-Header "BMAD-c9s v$BmadVersion — installer"
+    Write-Header "BMAD v6 + BMAD-c9s v$BmadVersion — installer"
 
     # Show version info
     if ($IsPowerShell5) {
@@ -827,6 +881,7 @@ function global:Main {
 
         New-Directories
         Install-Skills
+        Install-V6Bundle
         Install-Config
         Install-Templates
         Install-Utils
@@ -835,10 +890,10 @@ function global:Main {
         # Verify
         Write-Host ""
         if (Test-Installation) {
-            Write-Progress -Activity "Installing BMAD-c9s" -Status "Complete!" -PercentComplete 100
+            Write-Progress -Activity "Installing BMAD v6 + c9s" -Status "Complete!" -PercentComplete 100
             Write-Host ""
             Show-NextSteps
-            Write-Progress -Activity "Installing BMAD-c9s" -Completed
+            Write-Progress -Activity "Installing BMAD v6 + c9s" -Completed
             Write-Verbose "Installation completed successfully at: $(Get-Date)"
             exit 0
         } else {
@@ -854,7 +909,7 @@ function global:Main {
         }
     }
     catch {
-        Write-Progress -Activity "Installing BMAD-c9s" -Completed
+        Write-Progress -Activity "Installing BMAD v6 + c9s" -Completed
         Write-Host ""
         Write-Host "===============================================" -ForegroundColor Red
         Write-Host "  Installation Failed" -ForegroundColor Red

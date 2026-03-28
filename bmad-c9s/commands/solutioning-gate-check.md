@@ -6,4 +6,4 @@
 
 **Выход:** чек-лист как **story** в **`requirements/gate-check-{slug}.md`** (`content_format: MARKDOWN`) со ссылками на существующие story/issues.
 
-**Детали:** `bmad-v6/commands/solutioning-gate-check.md`
+**Детали (v6, EN):** `~/.claude/config/bmad/bmad-v6-bundle/commands/solutioning-gate-check.md`

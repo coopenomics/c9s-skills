@@ -10,14 +10,14 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 **Фаза:** 1 — Анализ.
 
-**Источник методологии:** `bmad-v6/skills/bmm/analyst/SKILL.md` (англ., детали).
+**Источник методологии (v6, EN):** `~/.claude/skills/bmad/bmm/analyst/SKILL.md`.
 
 ---
 
 ## Документы
 
-- Канон Capital: [FORMAT-CAPITAL-GITHUB.md](../../../docs/FORMAT-CAPITAL-GITHUB.md)
-- [TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)
+- Канон Capital: [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)
+- [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)
 - Пути: [helpers-ru.md](../../../utils/helpers-ru.md)
 
 ---
@@ -26,13 +26,13 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 | Артефакт | Куда |
 |----------|------|
-| Бриф, интервью, исследование, гипотезы | **Сначала** **`issues/*.md`** на этот шаг (frontmatter: **`created_by`**, **`submaster`**, **`creators`** = `username` из конфига — иначе нет учёта времени, см. [TASKS §1](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)), **затем** **`requirements/{slug}.md`** — `type: story`, **`content_format: MARKDOWN`**, обычно `status: pending` на время проработки |
+| Бриф, интервью, исследование, гипотезы | **Сначала** **`issues/*.md`** на этот шаг (frontmatter: **`created_by`**, **`submaster`**, **`creators`** = `username` из конфига — иначе нет учёта времени, см. [TASKS §1](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)), **затем** **`requirements/{slug}.md`** — `type: story`, **`content_format: MARKDOWN`**, обычно `status: pending` на время проработки |
 | Уточнение видения продукта | обновление тела **`project.md`** / **`component.md`** + **`updated_at`** |
 | Дополнительные срезы одной темы | отдельные story в **`requirements/`** (осмысленный slug), не папка `.c9s/` |
 
-**`title`** в frontmatter каждого story — **только русский**, **чёткий понятный заголовок** ([FORMAT §2.2](../../../docs/FORMAT-CAPITAL-GITHUB.md)).
+**`title`** в frontmatter каждого story — **только русский**, **чёткий понятный заголовок** ([FORMAT §2.2](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)).
 
-Декомпозицию **dev-задач на код** не задавать без PM/плана; **аналитические** задачи под бриф/исследование создаёшь **сам** в начале работы ([TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)).
+Декомпозицию **dev-задач на код** не задавать без PM/плана; **аналитические** задачи под бриф/исследование создаёшь **сам** в начале работы ([TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)).
 
 ---
 

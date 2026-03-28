@@ -6,4 +6,4 @@
 
 **Выход:** `requirements/architecture-*.md` с явным `content_format` (MARKDOWN / MERMAID / …).
 
-**Детали:** `bmad-v6/commands/architecture.md`
+**Детали (v6, EN):** `~/.claude/config/bmad/bmad-v6-bundle/commands/architecture.md`

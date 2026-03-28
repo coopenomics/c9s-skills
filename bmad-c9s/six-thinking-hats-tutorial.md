@@ -139,7 +139,7 @@
 
 ## Связь с bmad-c9s
 
-Итог сессии удобно оформить **задачей** `issues/*.md` и **story** в `requirements/*.md` с подзаголовками по шляпам; методика CIS — [skills/cis/creative-intelligence/SKILL.md](skills/cis/creative-intelligence/SKILL.md). Поля issue и статусы — [docs/TASKS-DOCUMENTS-TIME-POLICY.md](docs/TASKS-DOCUMENTS-TIME-POLICY.md).
+Итог сессии удобно оформить **задачей** `issues/*.md` и **story** в `requirements/*.md` с подзаголовками по шляпам; методика CIS — [skills/cis/creative-intelligence/SKILL.md](skills/cis/creative-intelligence/SKILL.md). Поля issue и статусы — [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md).
 
 ---
 

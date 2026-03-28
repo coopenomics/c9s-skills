@@ -6,4 +6,4 @@
 
 **Выход:** `requirements/ux-*.md` (MARKDOWN/MERMAID), ссылки на мокапы вне results при необходимости.
 
-**Детали:** `bmad-v6/commands/create-ux-design.md`
+**Детали (v6, EN):** `~/.claude/config/bmad/bmad-v6-bundle/commands/create-ux-design.md`

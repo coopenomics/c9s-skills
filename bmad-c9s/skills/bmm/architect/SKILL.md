@@ -10,14 +10,14 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 **Фаза:** 3 — Проектирование решения.
 
-**Источник:** `bmad-v6/skills/bmm/architect/SKILL.md`, `commands/architecture.md`.
+**Источник методологии (v6, EN):** `~/.claude/skills/bmad/bmm/architect/SKILL.md` · сценарий команды: `~/.claude/config/bmad/bmad-v6-bundle/commands/architecture.md`. (Путь `bmad-v6/skills/…` в репозитории пакета — не работает из чужого проекта.)
 
 ---
 
 ## Документы
 
-- [FORMAT-CAPITAL-GITHUB.md](../../../docs/FORMAT-CAPITAL-GITHUB.md) — обязательно **`content_format`** для каждого нового story
-- [TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)
+- [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md) — обязательно **`content_format`** для каждого нового story
+- [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)
 - [helpers-ru.md](../../../utils/helpers-ru.md)
 
 ---
@@ -26,11 +26,11 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 | Содержание | Формат файла |
 |------------|----------------|
-| Текстовая архитектура, ADR | **Сначала** задача **`issues/*.md`** («Архитектура…») с полями учёта (**`created_by`**, **`submaster`**, **`creators`**, см. [TASKS §1](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)), **затем** `requirements/*.md`, `type: story`, **`content_format: MARKDOWN`** |
-| Диаграммы компонентов / потоков | та же **задача** **`issues/*.md`** (поля учёта — [TASKS §1](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md)) или отдельная на срез, затем **`requirements/*.md`** с **`content_format: MERMAID`** / **DRAWIO** / **BPMN** |
+| Текстовая архитектура, ADR | **Сначала** задача **`issues/*.md`** («Архитектура…») с полями учёта (**`created_by`**, **`submaster`**, **`creators`**, см. [TASKS §1](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)), **затем** `requirements/*.md`, `type: story`, **`content_format: MARKDOWN`** |
+| Диаграммы компонентов / потоков | та же **задача** **`issues/*.md`** (поля учёта — [TASKS §1](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)) или отдельная на срез, затем **`requirements/*.md`** с **`content_format: MERMAID`** / **DRAWIO** / **BPMN** |
 | Уточнение границ и рисков | новые или обновлённые **`issues/*.md`** (статус `todo`/`in_progress`) |
 
-**`title`** у story в **`requirements/*.md`** — **только русский**, **чёткий заголовок** ([FORMAT §2.2](../../../docs/FORMAT-CAPITAL-GITHUB.md)).
+**`title`** у story в **`requirements/*.md`** — **только русский**, **чёткий заголовок** ([FORMAT §2.2](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)).
 
 Тело диаграмм — в markdown под frontmatter; для BPMN/DRAWIO — XML/текст согласно ожиданиям Capital (как на рабочем столе).
 

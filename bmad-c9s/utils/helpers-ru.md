@@ -2,9 +2,9 @@
 
 Сокращённые инструкции без исполняемых скриптов: агент выполняет шаги через чтение/запись файлов.
 
-Полная спецификация путей и полей: [../docs/FORMAT-CAPITAL-GITHUB.md](../docs/FORMAT-CAPITAL-GITHUB.md).
+Полная спецификация путей и полей: [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md).
 
-Git (results / монорепо): [../docs/GIT-COMMITS-POLICY.md](../docs/GIT-COMMITS-POLICY.md). Задачи, документы, `estimate`, `on_review`: [../docs/TASKS-DOCUMENTS-TIME-POLICY.md](../docs/TASKS-DOCUMENTS-TIME-POLICY.md).
+Git (results / монорепо): [GIT-COMMITS-POLICY.md](~/.claude/config/bmad/GIT-COMMITS-POLICY.md). Задачи, документы, `estimate`, `on_review`: [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md).
 
 ---
 
@@ -31,7 +31,7 @@ Git (results / монорепо): [../docs/GIT-COMMITS-POLICY.md](../docs/GIT-CO
 2. Если в конфиге задан **`results_commits_log`**: абсолютный путь — использовать как есть; иначе **`{projectRoot}/{results_commits_log}`**.
 3. Иначе: **`{projectRoot}/.c9s/results_commits.yaml`**.
 
-См. [docs/GIT-COMMITS-POLICY.md](../docs/GIT-COMMITS-POLICY.md) §2.4.
+См. [GIT-COMMITS-POLICY.md](~/.claude/config/bmad/GIT-COMMITS-POLICY.md) §2.4.
 
 ---
 
@@ -66,10 +66,10 @@ componentRoot = {projectRoot}/{active_component_path}
 
 Пути:
 
-- задачи: `{base}/issues/{issueSlug}.md` — в **теле** задачи весь контекст для реализации (bmad-c9s: без подпапок `*-requirements/`). В frontmatter новой задачи **обязательно**: **`created_by`**, **`submaster`**, **`creators: ["<username>"]`** — тот же **`username`**, что в **`c9s-config.yaml`**; иначе **не будет учёта времени** в Capital (см. [TASKS-DOCUMENTS-TIME-POLICY §1](../docs/TASKS-DOCUMENTS-TIME-POLICY.md)).
+- задачи: `{base}/issues/{issueSlug}.md` — в **теле** задачи весь контекст для реализации (bmad-c9s: без подпапок `*-requirements/`). В frontmatter новой задачи **обязательно**: **`created_by`**, **`submaster`**, **`creators: ["<username>"]`** — тот же **`username`**, что в **`c9s-config.yaml`**; иначе **не будет учёта времени** в Capital (см. [TASKS-DOCUMENTS-TIME-POLICY §1](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md)).
 - требования уровня проекта: `{base}/requirements/{storySlug}.md`
 
-**Наименование требований:** в каждом `{base}/requirements/*.md` поле **`title`** в frontmatter — **только русский язык**, заголовок **чёткий и понятный** (см. [FORMAT §2.2](../docs/FORMAT-CAPITAL-GITHUB.md)).
+**Наименование требований:** в каждом `{base}/requirements/*.md` поле **`title`** в frontmatter — **только русский язык**, заголовок **чёткий и понятный** (см. [FORMAT §2.2](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)).
 
 ---
 
