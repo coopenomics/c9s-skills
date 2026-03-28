@@ -1,149 +1,149 @@
-# Product Brief: {{project_name}}
+# Продуктовый бриф: {{project_name}}
 
-**Date:** {{date}}
-**Author:** {{user_name}}
-**Version:** 1.0
-**Project Type:** {{project_type}}
-**Project Level:** {{project_level}}
+**Дата:** {{date}}
+**Автор:** {{user_name}}
+**Версия:** 1.0
+**Тип проекта:** {{project_type}}
+**Уровень проекта:** {{project_level}}
 
 ---
 
-## Executive Summary
+## Краткое резюме
 
 {{executive_summary}}
 
 ---
 
-## Problem Statement
+## Формулировка проблемы
 
-### The Problem
+### Проблема
 
 {{problem_statement}}
 
-### Why Now?
+### Почему сейчас?
 
 {{why_now}}
 
-### Impact if Unsolved
+### Последствия, если не решить
 
 {{impact_if_unsolved}}
 
 ---
 
-## Target Audience
+## Целевая аудитория
 
-### Primary Users
+### Основные пользователи
 
 {{primary_users}}
 
-### Secondary Users
+### Вторичные пользователи
 
 {{secondary_users}}
 
-### User Needs
+### Потребности пользователей
 
 {{user_needs}}
 
 ---
 
-## Solution Overview
+## Обзор решения
 
-### Proposed Solution
+### Предлагаемое решение
 
 {{proposed_solution}}
 
-### Key Features
+### Ключевые возможности
 
 {{key_features}}
 
-### Value Proposition
+### Ценностное предложение
 
 {{value_proposition}}
 
 ---
 
-## Business Objectives
+## Бизнес-цели
 
-### Goals
+### Цели
 
 {{business_goals}}
 
-### Success Metrics
+### Метрики успеха
 
 {{success_metrics}}
 
-### Business Value
+### Бизнес-ценность
 
 {{business_value}}
 
 ---
 
-## Scope
+## Границы (scope)
 
-### In Scope
+### Входит в scope
 
 {{in_scope}}
 
-### Out of Scope
+### Не входит в scope
 
 {{out_of_scope}}
 
-### Future Considerations
+### На будущее
 
 {{future_considerations}}
 
 ---
 
-## Key Stakeholders
+## Ключевые стейкхолдеры
 
 {{stakeholders}}
 
 ---
 
-## Constraints and Assumptions
+## Ограничения и допущения
 
-### Constraints
+### Ограничения
 
 {{constraints}}
 
-### Assumptions
+### Допущения
 
 {{assumptions}}
 
 ---
 
-## Success Criteria
+## Критерии успеха
 
 {{success_criteria}}
 
 ---
 
-## Timeline and Milestones
+## Сроки и вехи
 
-### Target Launch
+### Целевой запуск
 
 {{target_launch}}
 
-### Key Milestones
+### Ключевые вехи
 
 {{key_milestones}}
 
 ---
 
-## Risks and Mitigation
+## Риски и меры
 
 {{risks}}
 
 ---
 
-## Next Steps
+## Следующие шаги
 
-1. Create Product Requirements Document (PRD) - `/prd`
-2. Conduct user research (optional) - `/research`
-3. Create UX design (if UI-heavy) - `/create-ux-design`
+1. Создать документ продуктовых требований (PRD) — `/prd`
+2. Провести пользовательское исследование (по желанию) — `/research`
+3. Создать UX-дизайн (если сильный UI) — `/create-ux-design`
 
 ---
 
-**This document was created using BMAD Method v6 - Phase 1 (Analysis)**
+**Документ создан по методу BMAD v6 — фаза 1 (анализ)**
 
-*To continue: Run `/workflow-status` to see your progress and next recommended workflow.*
+*Дальше: выполните `/workflow-status`, чтобы увидеть прогресс и рекомендуемый workflow.*

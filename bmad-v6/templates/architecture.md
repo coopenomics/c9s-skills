@@ -1,129 +1,129 @@
-# System Architecture: {{project_name}}
+# Системная архитектура: {{project_name}}
 
-**Date:** {{date}}
-**Architect:** {{user_name}}
-**Version:** 1.0
-**Project Type:** {{project_type}}
-**Project Level:** {{project_level}}
-**Status:** Draft
-
----
-
-## Document Overview
-
-This document defines the system architecture for {{project_name}}. It provides the technical blueprint for implementation, addressing all functional and non-functional requirements from the PRD.
-
-**Related Documents:**
-- Product Requirements Document: {{prd_path}}
-- Product Brief: {{product_brief_path}}
+**Дата:** {{date}}
+**Архитектор:** {{user_name}}
+**Версия:** 1.0
+**Тип проекта:** {{project_type}}
+**Уровень проекта:** {{project_level}}
+**Статус:** Черновик
 
 ---
 
-## Executive Summary
+## Обзор документа
+
+Документ описывает системную архитектуру {{project_name}}. Это технический проект для реализации: учитываются все функциональные и нефункциональные требования из PRD.
+
+**Связанные документы:**
+- Документ продуктовых требований (PRD): {{prd_path}}
+- Продуктовый бриф: {{product_brief_path}}
+
+---
+
+## Краткое резюме
 
 {{executive_summary}}
 
 ---
 
-## Architectural Drivers
+## Архитектурные драйверы
 
-These requirements heavily influence architectural decisions:
+Требования, которые сильнее всего влияют на архитектурные решения:
 
 {{architectural_drivers}}
 
 ---
 
-## System Overview
+## Обзор системы
 
-### High-Level Architecture
+### Архитектура верхнего уровня
 
 {{high_level_architecture}}
 
-### Architecture Diagram
+### Диаграмма архитектуры
 
 {{architecture_diagram}}
 
-### Architectural Pattern
+### Архитектурный паттерн
 
-**Pattern:** {{architectural_pattern}}
+**Паттерн:** {{architectural_pattern}}
 
-**Rationale:** {{pattern_rationale}}
+**Обоснование:** {{pattern_rationale}}
 
 ---
 
-## Technology Stack
+## Стек технологий
 
-### Frontend
+### Фронтенд
 
 {{frontend_stack}}
 
-### Backend
+### Бэкенд
 
 {{backend_stack}}
 
-### Database
+### База данных
 
 {{database_stack}}
 
-### Infrastructure
+### Инфраструктура
 
 {{infrastructure_stack}}
 
-### Third-Party Services
+### Сторонние сервисы
 
 {{third_party_services}}
 
-### Development & Deployment
+### Разработка и развёртывание
 
 {{dev_deployment_stack}}
 
 ---
 
-## System Components
+## Компоненты системы
 
 {{system_components}}
 
 ---
 
-## Data Architecture
+## Архитектура данных
 
-### Data Model
+### Модель данных
 
 {{data_model}}
 
-### Database Design
+### Проектирование БД
 
 {{database_design}}
 
-### Data Flow
+### Потоки данных
 
 {{data_flow}}
 
 ---
 
-## API Design
+## Проектирование API
 
-### API Architecture
+### Архитектура API
 
 {{api_architecture}}
 
-### Endpoints
+### Конечные точки (endpoints)
 
 {{api_endpoints}}
 
-### Authentication & Authorization
+### Аутентификация и авторизация
 
 {{api_auth}}
 
 ---
 
-## Non-Functional Requirements Coverage
+## Покрытие нефункциональных требований
 
 ### NFR-001: {{nfr_001_name}}
 
-**Requirement:** {{nfr_001_requirement}}
+**Требование:** {{nfr_001_requirement}}
 
-**Architecture Solution:** {{nfr_001_solution}}
+**Архитектурное решение:** {{nfr_001_solution}}
 
 ---
 
@@ -131,209 +131,209 @@ These requirements heavily influence architectural decisions:
 
 ---
 
-## Security Architecture
+## Архитектура безопасности
 
-### Authentication
+### Аутентификация
 
 {{auth_design}}
 
-### Authorization
+### Авторизация
 
 {{authz_design}}
 
-### Data Encryption
+### Шифрование данных
 
 {{encryption_design}}
 
-### Security Best Practices
+### Практики безопасности
 
 {{security_practices}}
 
 ---
 
-## Scalability & Performance
+## Масштабируемость и производительность
 
-### Scaling Strategy
+### Стратегия масштабирования
 
 {{scaling_strategy}}
 
-### Performance Optimization
+### Оптимизация производительности
 
 {{performance_optimization}}
 
-### Caching Strategy
+### Стратегия кэширования
 
 {{caching_strategy}}
 
-### Load Balancing
+### Балансировка нагрузки
 
 {{load_balancing}}
 
 ---
 
-## Reliability & Availability
+## Надёжность и доступность
 
-### High Availability Design
+### Проектирование высокой доступности
 
 {{ha_design}}
 
-### Disaster Recovery
+### Аварийное восстановление
 
 {{dr_design}}
 
-### Backup Strategy
+### Стратегия резервного копирования
 
 {{backup_strategy}}
 
-### Monitoring & Alerting
+### Мониторинг и оповещения
 
 {{monitoring_alerting}}
 
 ---
 
-## Integration Architecture
+## Архитектура интеграций
 
-### External Integrations
+### Внешние интеграции
 
 {{external_integrations}}
 
-### Internal Integrations
+### Внутренние интеграции
 
 {{internal_integrations}}
 
-### Message/Event Architecture (if applicable)
+### Сообщения / события (если применимо)
 
 {{messaging_architecture}}
 
 ---
 
-## Development Architecture
+## Архитектура разработки
 
-### Code Organization
+### Организация кода
 
 {{code_organization}}
 
-### Module Structure
+### Структура модулей
 
 {{module_structure}}
 
-### Testing Strategy
+### Стратегия тестирования
 
 {{testing_strategy}}
 
-### CI/CD Pipeline
+### Конвейер CI/CD
 
 {{cicd_pipeline}}
 
 ---
 
-## Deployment Architecture
+## Архитектура развёртывания
 
-### Environments
+### Окружения
 
 {{environments}}
 
-### Deployment Strategy
+### Стратегия развёртывания
 
 {{deployment_strategy}}
 
-### Infrastructure as Code
+### Инфраструктура как код
 
 {{iac}}
 
 ---
 
-## Requirements Traceability
+## Трассировка требований
 
-### Functional Requirements Coverage
+### Покрытие функциональных требований
 
 {{fr_traceability}}
 
-### Non-Functional Requirements Coverage
+### Покрытие нефункциональных требований
 
 {{nfr_traceability}}
 
 ---
 
-## Trade-offs & Decision Log
+## Компромиссы и журнал решений
 
 {{tradeoffs}}
 
 ---
 
-## Open Issues & Risks
+## Открытые вопросы и риски
 
 {{open_issues}}
 
 ---
 
-## Assumptions & Constraints
+## Допущения и ограничения
 
 {{assumptions}}
 
 ---
 
-## Future Considerations
+## На будущее
 
 {{future_considerations}}
 
 ---
 
-## Approval & Sign-off
+## Согласование и подписи
 
-**Review Status:**
-- [ ] Technical Lead
-- [ ] Product Owner
-- [ ] Security Architect (if applicable)
-- [ ] DevOps Lead
-
----
-
-## Revision History
-
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0 | {{date}} | {{user_name}} | Initial architecture |
+**Статус ревью:**
+- [ ] Технический лид
+- [ ] Владелец продукта (Product Owner)
+- [ ] Архитектор безопасности (если применимо)
+- [ ] Руководитель DevOps
 
 ---
 
-## Next Steps
+## История изменений
 
-### Phase 4: Sprint Planning & Implementation
-
-Run `/sprint-planning` to:
-- Break epics into detailed user stories
-- Estimate story complexity
-- Plan sprint iterations
-- Begin implementation following this architectural blueprint
-
-**Key Implementation Principles:**
-1. Follow component boundaries defined in this document
-2. Implement NFR solutions as specified
-3. Use technology stack as defined
-4. Follow API contracts exactly
-5. Adhere to security and performance guidelines
+| Версия | Дата | Автор | Изменения |
+|--------|------|-------|-----------|
+| 1.0 | {{date}} | {{user_name}} | Первоначальная архитектура |
 
 ---
 
-**This document was created using BMAD Method v6 - Phase 3 (Solutioning)**
+## Следующие шаги
 
-*To continue: Run `/workflow-status` to see your progress and next recommended workflow.*
+### Фаза 4: Планирование спринта и реализация
+
+Выполните `/sprint-planning`, чтобы:
+- разбить эпики на детальные пользовательские истории;
+- оценить сложность историй;
+- спланировать итерации спринта;
+- начать реализацию по этому архитектурному проекту.
+
+**Ключевые принципы реализации:**
+1. Соблюдать границы компонентов, заданные в документе.
+2. Реализовывать решения по NFR в соответствии со спецификацией.
+3. Использовать согласованный стек технологий.
+4. Следовать контрактам API.
+5. Соблюдать требования безопасности и производительности.
 
 ---
 
-## Appendix A: Technology Evaluation Matrix
+**Документ создан по методу BMAD v6 — фаза 3 (проектирование решения)**
+
+*Дальше: выполните `/workflow-status`, чтобы увидеть прогресс и рекомендуемый workflow.*
+
+---
+
+## Приложение A: Матрица оценки технологий
 
 {{tech_evaluation_matrix}}
 
 ---
 
-## Appendix B: Capacity Planning
+## Приложение B: Планирование ёмкости
 
 {{capacity_planning}}
 
 ---
 
-## Appendix C: Cost Estimation
+## Приложение C: Оценка затрат
 
 {{cost_estimation}}

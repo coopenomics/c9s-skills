@@ -1,50 +1,50 @@
-# Product Requirements Document: {{project_name}}
+# Документ продуктовых требований (PRD): {{project_name}}
 
-**Date:** {{date}}
-**Author:** {{user_name}}
-**Version:** 1.0
-**Project Type:** {{project_type}}
-**Project Level:** {{project_level}}
-**Status:** Draft
-
----
-
-## Document Overview
-
-This Product Requirements Document (PRD) defines the functional and non-functional requirements for {{project_name}}. It serves as the source of truth for what will be built and provides traceability from requirements through implementation.
-
-**Related Documents:**
-- Product Brief: {{product_brief_path}}
+**Дата:** {{date}}
+**Автор:** {{user_name}}
+**Версия:** 1.0
+**Тип проекта:** {{project_type}}
+**Уровень проекта:** {{project_level}}
+**Статус:** Черновик
 
 ---
 
-## Executive Summary
+## Обзор документа
+
+Этот PRD (Product Requirements Document) определяет функциональные и нефункциональные требования к {{project_name}}. Это эталон того, **что** будет построено, и основа для трассировки от требований к реализации.
+
+**Связанные документы:**
+- Продуктовый бриф: {{product_brief_path}}
+
+---
+
+## Краткое резюме
 
 {{executive_summary}}
 
 ---
 
-## Product Goals
+## Цели продукта
 
-### Business Objectives
+### Бизнес-цели
 
 {{business_objectives}}
 
-### Success Metrics
+### Метрики успеха
 
 {{success_metrics}}
 
 ---
 
-## Functional Requirements
+## Функциональные требования
 
-Functional Requirements (FRs) define **what** the system does - specific features and behaviors.
+Функциональные требования (FR) описывают, **что** делает система — конкретные возможности и поведение.
 
-Each requirement includes:
-- **ID**: Unique identifier (FR-001, FR-002, etc.)
-- **Priority**: Must Have / Should Have / Could Have / Won't Have (MoSCoW)
-- **Description**: What the system should do
-- **Acceptance Criteria**: How to verify it's complete
+Каждое требование включает:
+- **ID**: уникальный идентификатор (FR-001, FR-002 и т.д.)
+- **Приоритет**: Must Have / Should Have / Could Have / Won't Have (MoSCoW)
+- **Описание**: что система должна делать
+- **Критерии приёмки**: как проверить выполнение
 
 ---
 
@@ -52,9 +52,9 @@ Each requirement includes:
 
 ---
 
-## Non-Functional Requirements
+## Нефункциональные требования
 
-Non-Functional Requirements (NFRs) define **how** the system performs - quality attributes and constraints.
+Нефункциональные требования (NFR) описывают, **как** система работает — качественные характеристики и ограничения.
 
 ---
 
@@ -62,11 +62,11 @@ Non-Functional Requirements (NFRs) define **how** the system performs - quality 
 
 ---
 
-## Epics
+## Эпики
 
-Epics are logical groupings of related functionality that will be broken down into user stories during sprint planning (Phase 4).
+Эпики — логические группы связанного функционала; на этапе планирования спринта (фаза 4) они дробятся на пользовательские истории.
 
-Each epic maps to multiple functional requirements and will generate 2-10 stories.
+Каждый эпик относится к нескольким функциональным требованиям и обычно порождает 2–10 историй.
 
 ---
 
@@ -74,11 +74,11 @@ Each epic maps to multiple functional requirements and will generate 2-10 storie
 
 ---
 
-## User Stories (High-Level)
+## Пользовательские истории (верхний уровень)
 
-User stories follow the format: "As a [user type], I want [goal] so that [benefit]."
+Формат истории: «Как [тип пользователя], я хочу [цель], чтобы [польза].»
 
-These are preliminary stories. Detailed stories will be created in Phase 4 (Implementation).
+Это предварительные истории. Детальные истории создаются на фазе 4 (реализация).
 
 ---
 
@@ -86,108 +86,108 @@ These are preliminary stories. Detailed stories will be created in Phase 4 (Impl
 
 ---
 
-## User Personas
+## Персоны пользователей
 
 {{user_personas}}
 
 ---
 
-## User Flows
+## Пользовательские потоки
 
 {{user_flows}}
 
 ---
 
-## Dependencies
+## Зависимости
 
-### Internal Dependencies
+### Внутренние зависимости
 
 {{internal_dependencies}}
 
-### External Dependencies
+### Внешние зависимости
 
 {{external_dependencies}}
 
 ---
 
-## Assumptions
+## Допущения
 
 {{assumptions}}
 
 ---
 
-## Out of Scope
+## Вне scope
 
 {{out_of_scope}}
 
 ---
 
-## Open Questions
+## Открытые вопросы
 
 {{open_questions}}
 
 ---
 
-## Approval & Sign-off
+## Согласование и подписи
 
-### Stakeholders
+### Стейкхолдеры
 
 {{stakeholders}}
 
-### Approval Status
+### Статус согласования
 
-- [ ] Product Owner
-- [ ] Engineering Lead
-- [ ] Design Lead
-- [ ] QA Lead
-
----
-
-## Revision History
-
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0 | {{date}} | {{user_name}} | Initial PRD |
+- [ ] Владелец продукта (Product Owner)
+- [ ] Руководитель разработки (Engineering Lead)
+- [ ] Руководитель дизайна (Design Lead)
+- [ ] Руководитель QA (QA Lead)
 
 ---
 
-## Next Steps
+## История изменений
 
-### Phase 3: Architecture
-
-Run `/architecture` to create system architecture based on these requirements.
-
-The architecture will address:
-- All functional requirements (FRs)
-- All non-functional requirements (NFRs)
-- Technical stack decisions
-- Data models and APIs
-- System components
-
-### Phase 4: Sprint Planning
-
-After architecture is complete, run `/sprint-planning` to:
-- Break epics into detailed user stories
-- Estimate story complexity
-- Plan sprint iterations
-- Begin implementation
+| Версия | Дата | Автор | Изменения |
+|--------|------|-------|-----------|
+| 1.0 | {{date}} | {{user_name}} | Первоначальный PRD |
 
 ---
 
-**This document was created using BMAD Method v6 - Phase 2 (Planning)**
+## Следующие шаги
 
-*To continue: Run `/workflow-status` to see your progress and next recommended workflow.*
+### Фаза 3: Архитектура
+
+Выполните `/architecture`, чтобы создать системную архитектуру на основе этих требований.
+
+Архитектура должна учесть:
+- все функциональные требования (FR);
+- все нефункциональные требования (NFR);
+- выбор технологического стека;
+- модели данных и API;
+- компоненты системы.
+
+### Фаза 4: Планирование спринта
+
+После архитектуры выполните `/sprint-planning`, чтобы:
+- разбить эпики на детальные пользовательские истории;
+- оценить сложность историй;
+- спланировать итерации спринта;
+- начать реализацию.
 
 ---
 
-## Appendix A: Requirements Traceability Matrix
+**Документ создан по методу BMAD v6 — фаза 2 (планирование)**
 
-| Epic ID | Epic Name | Functional Requirements | Story Count (Est.) |
-|---------|-----------|-------------------------|-------------------|
+*Дальше: выполните `/workflow-status`, чтобы увидеть прогресс и рекомендуемый workflow.*
+
+---
+
+## Приложение A: Матрица трассировки требований
+
+| ID эпика | Название эпика | Функциональные требования | Оценка числа историй |
+|----------|----------------|---------------------------|----------------------|
 {{traceability_matrix}}
 
 ---
 
-## Appendix B: Prioritization Details
+## Приложение B: Детали приоритизации
 
 {{prioritization_details}}

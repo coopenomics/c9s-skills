@@ -1,147 +1,147 @@
-# Technical Specification: {{project_name}}
+# Техническая спецификация: {{project_name}}
 
-**Date:** {{date}}
-**Author:** {{user_name}}
-**Version:** 1.0
-**Project Type:** {{project_type}}
-**Project Level:** {{project_level}}
-**Status:** Draft
-
----
-
-## Document Overview
-
-This Technical Specification provides focused technical planning for {{project_name}}. It is designed for smaller projects (Level 0-1) that need clear requirements without heavyweight PRD overhead.
-
-**Related Documents:**
-- Product Brief: {{product_brief_path}}
+**Дата:** {{date}}
+**Автор:** {{user_name}}
+**Версия:** 1.0
+**Тип проекта:** {{project_type}}
+**Уровень проекта:** {{project_level}}
+**Статус:** Черновик
 
 ---
 
-## Problem & Solution
+## Обзор документа
 
-### Problem Statement
+Эта техническая спецификация задаёт сфокусированное техническое планирование для {{project_name}}. Предназначена для небольших проектов (уровни 0–1), которым нужны чёткие требования без тяжёлого PRD.
+
+**Связанные документы:**
+- Продуктовый бриф: {{product_brief_path}}
+
+---
+
+## Проблема и решение
+
+### Формулировка проблемы
 
 {{problem_statement}}
 
-### Proposed Solution
+### Предлагаемое решение
 
 {{proposed_solution}}
 
 ---
 
-## Requirements
+## Требования
 
-### What Needs to Be Built
+### Что нужно построить
 
 {{requirements_list}}
 
-### What This Does NOT Include
+### Что явно не входит
 
 {{out_of_scope}}
 
 ---
 
-## Technical Approach
+## Технический подход
 
-### Technology Stack
+### Стек технологий
 
 {{tech_stack}}
 
-### Architecture Overview
+### Обзор архитектуры
 
 {{architecture_overview}}
 
-### Data Model (if applicable)
+### Модель данных (если применимо)
 
 {{data_model}}
 
-### API Design (if applicable)
+### Проектирование API (если применимо)
 
 {{api_design}}
 
 ---
 
-## Implementation Plan
+## План реализации
 
-### Stories
+### Истории (stories)
 
 {{stories_list}}
 
-### Development Phases
+### Фазы разработки
 
 {{development_phases}}
 
 ---
 
-## Acceptance Criteria
+## Критерии приёмки
 
-How we'll know it's done:
+Как поймём, что готово:
 
 {{acceptance_criteria}}
 
 ---
 
-## Non-Functional Requirements
+## Нефункциональные требования
 
-### Performance
+### Производительность
 
 {{performance_requirements}}
 
-### Security
+### Безопасность
 
 {{security_requirements}}
 
-### Other
+### Прочее
 
 {{other_nfr}}
 
 ---
 
-## Dependencies
+## Зависимости
 
 {{dependencies}}
 
 ---
 
-## Risks & Mitigation
+## Риски и меры
 
 {{risks}}
 
 ---
 
-## Timeline
+## Сроки
 
-**Target Completion:** {{target_completion}}
+**Целевое завершение:** {{target_completion}}
 
-**Milestones:**
+**Вехи:**
 {{milestones}}
 
 ---
 
-## Approval
+## Согласование
 
-**Reviewed By:**
-- [ ] {{user_name}} (Author)
-- [ ] Technical Lead
-- [ ] Product Owner
-
----
-
-## Next Steps
-
-### Phase 4: Implementation
-
-For Level 0 projects (single story):
-- Run `/create-story` to create the story
-- Run `/dev-story` to implement
-
-For Level 1 projects (1-10 stories):
-- Run `/sprint-planning` to plan your sprint
-- Then create and implement stories
+**Проверили:**
+- [ ] {{user_name}} (автор)
+- [ ] Технический лид
+- [ ] Владелец продукта (Product Owner)
 
 ---
 
-**This document was created using BMAD Method v6 - Phase 2 (Planning)**
+## Следующие шаги
 
-*To continue: Run `/workflow-status` to see your progress and next recommended workflow.*
+### Фаза 4: Реализация
+
+Для проектов уровня 0 (одна история):
+- Выполните `/create-story`, чтобы создать историю
+- Выполните `/dev-story` для реализации
+
+Для проектов уровня 1 (1–10 историй):
+- Выполните `/sprint-planning` для планирования спринта
+- Затем создайте и реализуйте истории
+
+---
+
+**Документ создан по методу BMAD v6 — фаза 2 (планирование)**
+
+*Дальше: выполните `/workflow-status`, чтобы увидеть прогресс и рекомендуемый workflow.*
