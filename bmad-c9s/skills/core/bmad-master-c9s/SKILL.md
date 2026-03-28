@@ -15,6 +15,14 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep, TodoWrite
 
 ---
 
+## ОБЯЗАТЕЛЬНО: СНАЧАЛА ЗАДАЧА `issues/*.md`, ПОТОМ `requirements/` (БЕЗ ИСКЛЮЧЕНИЙ)
+
+**НИ ОДИН** сценарий bmad-c9s (включая `/tech-spec`, PRD, архитектуру) **НЕ** начинается с правок **`requirements/*.md`**, пока не создан файл **`issues/{slug}.md`** с `created_by` / `submaster` / `creators` и **не сделан commit + push** в results. Иначе **не работает учёт времени в Capital** — это прямой ущерб оператору.
+
+**ЗАПРЕЩЕНО** советовать «добавить задачу потом» или «задним числом». Политика: [TASKS-DOCUMENTS-TIME-POLICY.md](../../../docs/TASKS-DOCUMENTS-TIME-POLICY.md).
+
+---
+
 ## Обязательные ссылки
 
 - [CLAUDE.md](../../../CLAUDE.md) — обзор пакета

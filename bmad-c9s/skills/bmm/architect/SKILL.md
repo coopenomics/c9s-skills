@@ -14,6 +14,12 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 ---
 
+## ОБЯЗАТЕЛЬНО (БЕЗ ИСКЛЮЧЕНИЙ): СНАЧАЛА `issues/*.md` + PUSH, ПОТОМ `requirements/`
+
+Архитектура и диаграммы в **`requirements/`** — **ТОЛЬКО** после задачи **`issues/*.md`** и **commit + push**. **ЗАПРЕЩЕНО** оформлять задачу после факта. [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md).
+
+---
+
 ## Документы
 
 - [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md) — обязательно **`content_format`** для каждого нового story

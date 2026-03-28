@@ -14,6 +14,12 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 ---
 
+## ОБЯЗАТЕЛЬНО (БЕЗ ИСКЛЮЧЕНИЙ): СНАЧАЛА `issues/*.md` + PUSH, ПОТОМ `requirements/`
+
+Бриф, исследование, любой story в **`requirements/`** — **ТОЛЬКО** после создания задачи **`issues/*.md`** и **commit + push**. **ЗАПРЕЩЕНО** «задачу потом» / «задним числом». [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md).
+
+---
+
 ## Документы
 
 - Канон Capital: [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)

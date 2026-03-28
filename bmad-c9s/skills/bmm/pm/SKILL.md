@@ -14,6 +14,14 @@ allowed-tools: Read, Write, Edit, Glob, Grep, TodoWrite
 
 ---
 
+## ОБЯЗАТЕЛЬНО (БЕЗ ИСКЛЮЧЕНИЙ): СНАЧАЛА ISSUE, ПОТОМ STORY
+
+**ПЕРЕД** любым PRD, **техспекой** и правками **`requirements/*.md`**: создать **`issues/*.md`** (полный frontmatter + `created_by` / `submaster` / `creators`), **commit + push**. Команда **`/tech-spec`** или **«разработай техспеку»** **НЕ** отменяет это правило.
+
+**ЗАПРЕЩЕНО** предлагать задачу «задним числом». См. [TASKS-DOCUMENTS-TIME-POLICY.md](~/.claude/config/bmad/TASKS-DOCUMENTS-TIME-POLICY.md).
+
+---
+
 ## Документы
 
 - [FORMAT-CAPITAL-GITHUB.md](~/.claude/config/bmad/FORMAT-CAPITAL-GITHUB.md)
